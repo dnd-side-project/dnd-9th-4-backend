@@ -9,7 +9,7 @@ on:
 # 리전, 버킷 이름, CodeDeploy 앱 이름, CodeDeploy 배포 그룹 이름
 env:
   AWS_REGION: ap-northeast-2
-  S3_BUCKET_NAME: dnd-github-actions-s3-bucket
+  S3_BUCKET_NAME: dnd-github-action-s3-bucket
   CODE_DEPLOY_APPLICATION_NAME: dnd-codedeploy-app
   CODE_DEPLOY_DEPLOYMENT_GROUP_NAME: dnd-codedeploy-deployment-group
 
