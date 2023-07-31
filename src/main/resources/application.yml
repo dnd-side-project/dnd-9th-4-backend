@@ -1,0 +1,5 @@
+# application.yml (공통 설정)
+spring:
+  profiles:
+    active: dev
+
