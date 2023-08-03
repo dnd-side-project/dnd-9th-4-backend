@@ -3,8 +3,6 @@ server:
   port: 7000
 
 spring:
-  profiles:
-    active: health-stage
   datasource:
     url: ${SECRET_URL}
     username: ${SECRET_USERNAME}

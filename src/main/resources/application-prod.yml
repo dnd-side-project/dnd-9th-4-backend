@@ -3,8 +3,6 @@ server:
   port: 8000
 
 spring:
-  profiles:
-    active: health-prod
   datasource:
     url: ${SECRET_URL}
     username: ${SECRET_USERNAME}
