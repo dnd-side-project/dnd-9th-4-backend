@@ -12,6 +12,10 @@ env:
   S3_BUCKET_NAME: dnd-github-action-s3-dev-bucket
   CODE_DEPLOY_APPLICATION_NAME: dnd-codedeploy-dev-app
   CODE_DEPLOY_DEPLOYMENT_GROUP_NAME: dnd-codedeploy-dev-group
+  SECRET_URL: ${{ secrets.SECRET_URL }}
+  SECRET_USERNAME: ${{ secrets.SECRET_USERNAME }}
+  SECRET_PASSWORD: ${{ secrets.SECRET_PASSWORD }}
+  SECRET_DRIVER_CLASS_NAME: ${{ secrets.SECRET_DRIVER_CLASS_NAME }}
 
 permissions:
   contents: read
@@ -65,3 +69,8 @@ jobs:
           --deployment-config-name CodeDeployDefault.AllAtOnce \
           --deployment-group-name ${{ env.CODE_DEPLOY_DEPLOYMENT_GROUP_NAME }} \
           --s3-location bucket=$S3_BUCKET_NAME,key=$GITHUB_SHA.zip,bundleType=zip
+        # 데이터베이스 환경 변수 활용
+        echo "datasource.url=${{ secrets.SECRET_URL }}" >> $GITHUB_ENV
+        echo "datasource.username=${{ secrets.SECRET_USERNAME }}" >> $GITHUB_ENV
+        echo "datasource.password=${{ secrets.SECRET_PASSWORD }}" >> $GITHUB_ENV
+        echo "datasource.driver-class-name=${{ secrets.SECRET_DRIVER_CLASS_NAME }}" >> $GITHUB_ENV

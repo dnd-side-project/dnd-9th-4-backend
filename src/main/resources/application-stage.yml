@@ -6,10 +6,10 @@ spring:
   profiles:
     active: health-stage
   datasource:
-      url: ${secret_url}
-      username: ${env_variables.secret_username}
-      password: ${env_variables.secret_password}
-      driver-class-name: ${env_variables.secret_driver-class-name}
+      url: ${SECRET_URL}
+      username: ${SECRET_USERNAME}
+      password: ${SECRET_PASSWORD}
+      driver-class-name: ${SECRET_DRIVER_CLASS_NAME}
   jpa:
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
     hibernate:
