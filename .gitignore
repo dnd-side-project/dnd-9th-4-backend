@@ -35,3 +35,9 @@ out/
 
 ### VS Code ###
 .vscode/
+
+### Local val ###
+/src/main/resources/application-val.yaml
+
+### MAC ENV ###
+.DS_Store
