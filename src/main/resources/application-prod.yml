@@ -1,20 +1,23 @@
 # application-prod.yml (실제 배포 환경 설정)
 server:
-  port: 8080
+  port: 8000
 
 spring:
   profiles:
     active: health-prod
   datasource:
-    url: jdbc:mysql://your-mysql-server/your_database_name
-    username: your_mysql_username
-    password: your_mysql_password
-    driver-class-name: com.mysql.cj.jdbc.Driver
+      url: ${secret_url}
+      username: ${env_variables.secret_username}
+      password: ${env_variables.secret_password}
+      driver-class-name: ${env_variables.secret_driver-class-name}
   jpa:
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
     hibernate:
-      ddl-auto: none # 배포 환경에서는 DDL 자동 생성을 비활성화합니다. (수동으로 스키마 생성)
+      ddl-auto: none
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    generate-ddl: false
+    show-sql: true
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.MySQLDialect
-        show_sql: false # 배포 환경에서는 SQL 출력을 비활성화합니다.
-        format_sql: false
+        format_sql: true

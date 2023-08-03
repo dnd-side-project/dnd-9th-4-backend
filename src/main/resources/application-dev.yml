@@ -1,6 +1,6 @@
 # application-dev.yml (로컬 개발 환경 설정)
 server:
-  port: 8000
+  port: 8080
 
 spring:
   application:
