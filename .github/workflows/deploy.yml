@@ -15,7 +15,6 @@ env:
   SECRET_URL: ${{ secrets.SECRET_URL }}
   SECRET_USERNAME: ${{ secrets.SECRET_USERNAME }}
   SECRET_PASSWORD: ${{ secrets.SECRET_PASSWORD }}
-  SECRET_DRIVER_CLASS_NAME: ${{ secrets.SECRET_DRIVER_CLASS_NAME }}
 
 
 permissions:

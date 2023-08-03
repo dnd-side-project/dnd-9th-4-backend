@@ -7,7 +7,7 @@ spring:
     url: ${SECRET_URL}
     username: ${SECRET_USERNAME}
     password: ${SECRET_PASSWORD}
-    driver-class-name: ${SECRET_DRIVER_CLASS_NAME}
+    driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
     hibernate:
