@@ -12,10 +12,6 @@ env:
   S3_BUCKET_NAME: dnd-github-action-s3-bucket
   CODE_DEPLOY_APPLICATION_NAME: dnd-codedeploy-app
   CODE_DEPLOY_DEPLOYMENT_GROUP_NAME: dnd-codedeploy-deployment-group
-  SECRET_URL: ${{ secrets.SECRET_URL }}
-  SECRET_USERNAME: ${{ secrets.SECRET_USERNAME }}
-  SECRET_PASSWORD: ${{ secrets.SECRET_PASSWORD }}
-
 
 permissions:
   contents: read
@@ -37,13 +33,6 @@ jobs:
       with:
         distribution: 'temurin'
         java-version: '11'
-
-    # 데이터베이스 환경 변수 활용
-    - name: Access Secrets
-      run: |
-        echo "SECRET_URL: ${{ env.SECRET_URL }}"
-        echo "SECRET_USERNAME: ${{ env.SECRET_USERNAME }}"
-        echo "SECRET_PASSWORD: ${{ env.SECRET_PASSWORD }}"
 
     # (3) Gradle build (Test 제외)
     - name: Build with Gradle
