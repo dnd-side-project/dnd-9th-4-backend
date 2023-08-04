@@ -4,9 +4,9 @@ server:
 
 spring:
   datasource:
-    url: ${{ secrets.SECRET_URL }}
-    username: ${{ secrets.SECRET_USERNAME }}
-    password: ${{ secrets.SECRET_PASSWORD }}
+    url: ${SECRET_URL}
+    username: ${SECRET_USERNAME}
+    password: ${SECRET_PASSWORD}
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
@@ -15,7 +15,7 @@ spring:
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
     generate-ddl: false
-    show-sql: true
+    show-sql: false
     properties:
       hibernate:
-        format_sql: true
+        format_sql: false
