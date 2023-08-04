@@ -38,6 +38,13 @@ jobs:
         distribution: 'temurin'
         java-version: '11'
 
+    # 데이터베이스 환경 변수 활용
+    - name: Access Secrets
+      run: |
+        echo "SECRET_URL: ${{ env.SECRET_URL }}"
+        echo "SECRET_USERNAME: ${{ env.SECRET_USERNAME }}"
+        echo "SECRET_PASSWORD: ${{ env.SECRET_PASSWORD }}"
+
     # (3) Gradle build (Test 제외)
     - name: Build with Gradle
       uses: gradle/gradle-build-action@0d13054264b0bb894ded474f08ebb30921341cee
@@ -69,7 +76,3 @@ jobs:
           --deployment-config-name CodeDeployDefault.AllAtOnce \
           --deployment-group-name ${{ env.CODE_DEPLOY_DEPLOYMENT_GROUP_NAME }} \
           --s3-location bucket=$S3_BUCKET_NAME,key=$GITHUB_SHA.zip,bundleType=zip
-        # 데이터베이스 환경 변수 활용
-        echo "SECRET_URL: ${{ env.SECRET_URL }}"
-        echo "SECRET_USERNAME: ${{ env.SECRET_USERNAME }}"
-        echo "SECRET_PASSWORD: ${{ env.SECRET_PASSWORD }}"
