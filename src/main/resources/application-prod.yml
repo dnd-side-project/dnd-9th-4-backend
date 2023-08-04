@@ -4,9 +4,9 @@ server:
 
 spring:
   datasource:
-    url: ${{ secrets.SECRET_URL }}
-    username: ${{ secrets.SECRET_USERNAME }}
-    password: ${{ secrets.SECRET_PASSWORD }}
+    url: jdbc:mysql:// dnd-health.cade1afm85pd.ap-northeast-2.rds.amazonaws.com:3306/dnd-health?useSSL=false
+    username: admin
+    password: dnd12345678
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
