@@ -4,9 +4,9 @@ server:
 
 spring:
   datasource:
-    url: ${{ secrets.SECRET_URL }}
-    username: ${{ secrets.SECRET_USERNAME }}
-    password: ${{ secrets.SECRET_PASSWORD }}
+    url: ${DATABASE_URL}
+    username: ${DATABASE_USERNAME}
+    password: ${DATABASE_PASSWORD}
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
