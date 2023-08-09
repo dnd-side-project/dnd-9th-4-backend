@@ -1,8 +1,9 @@
-package com.dnd.health.config.jwt;
+package com.dnd.health.config.jwt.filter;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.dnd.health.config.auth.PrincipalDetails;
+import com.dnd.health.config.jwt.JwtProperties;
 import com.dnd.health.member.domain.Member;
 import com.dnd.health.member.domain.MemberRepository;
 import java.io.IOException;
@@ -55,7 +56,7 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
 
         // 서명이 정상적으로 됨
         if (username != null) {
-            Optional<Member> member = memberRepository.findByUsername(username);
+            Member member = memberRepository.findByUsername(username);
 
             // 인증은 토큰 검증시 끝. 인증을 하기 위해서가 아닌 스프링 시큐리티가 수행해주는 권한 처리를 위해
             // 아래와 같이 토큰을 만들어서 Authentication 객체를 강제로 만들고 그걸 세션에 저장!
@@ -68,8 +69,6 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
             // 강제로 시큐리티의 세션에 접근하여 값 저장
             SecurityContextHolder.getContext().setAuthentication(authentication);
         }
-
         chain.doFilter(request, response);
     }
-
 }

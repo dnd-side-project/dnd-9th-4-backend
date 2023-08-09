@@ -4,18 +4,18 @@ import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
 @Embeddable
-public class Region {
-    @Column(name = "region")
+public class Gender {
+    @Column(name = "gender")
     private String value;
 
-    protected Region() {
+    protected Gender() {
     }
 
-    private Region(String value) {
+    private Gender(String value) {
         this.value = value;
     }
 
-    public static Region from(final String region) {
-        return new Region(region);
+    public static Gender from(final String gender) {
+        return new Gender(gender);
     }
 }

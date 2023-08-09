@@ -1,10 +1,10 @@
 package com.dnd.health.config;
 
-import com.dnd.health.config.jwt.JwtAuthenticationFilter;
-import com.dnd.health.config.jwt.JwtAuthorizationFilter;
+import com.dnd.health.config.jwt.filter.JwtAuthenticationFilter;
+import com.dnd.health.config.jwt.filter.JwtAuthorizationFilter;
+import com.dnd.health.config.jwt.service.JwtService;
 import com.dnd.health.member.domain.MemberRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -21,10 +21,10 @@ import org.springframework.security.web.SecurityFilterChain;
 @RequiredArgsConstructor
 public class SecurityConfig {
 
-    @Autowired
     private final MemberRepository memberRepository;
 
-    @Autowired
+    private final JwtService jwtService;
+
     private final CorsConfig corsConfig;
 
     @Bean
@@ -43,7 +43,9 @@ public class SecurityConfig {
                 .httpBasic().disable()
                 .apply(new MyCustomDsl()) // 커스텀 필터 등록
                 .and()
-                .authorizeRequests(authorize -> authorize.antMatchers("/api/**")
+                .authorizeRequests(authorize -> authorize
+                        .antMatchers("/api/login").permitAll()
+                        .antMatchers("/api/**")
                         .access("hasRole('ROLE_USER') or hasRole('ROLE_MANAGER') or hasRole('ROLE_ADMIN')")
                         .antMatchers("/api/manager/**")
                         .access("hasRole('ROLE_MANAGER') or hasRole('ROLE_ADMIN')")
@@ -55,11 +57,11 @@ public class SecurityConfig {
 
     public class MyCustomDsl extends AbstractHttpConfigurer<MyCustomDsl, HttpSecurity> {
         @Override
-        public void configure(HttpSecurity http) throws Exception {
+        public void configure(HttpSecurity http) {
             AuthenticationManager authenticationManager = http.getSharedObject(AuthenticationManager.class);
             http
                     .addFilter(corsConfig.corsFilter())
-                    .addFilter(new JwtAuthenticationFilter(authenticationManager))
+                    .addFilter(new JwtAuthenticationFilter(authenticationManager, jwtService))
                     .addFilter(new JwtAuthorizationFilter(authenticationManager, memberRepository));
         }
     }

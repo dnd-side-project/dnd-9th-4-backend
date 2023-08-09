@@ -1,11 +1,11 @@
-package com.dnd.health.member.domain;
+package com.dnd.health.profile.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
 @Embeddable
 public class PeriodEx {
-    @Column(name = "period_ex")
+    @Column(name = "exercise_period")
     private String value;
 
     protected PeriodEx() {
