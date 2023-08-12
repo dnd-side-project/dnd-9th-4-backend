@@ -3,11 +3,13 @@ server:
   port: 7000
 
 spring:
+
   datasource:
     url: ${DATABASE_URL}
     username: ${DATABASE_USERNAME}
     password: ${DATABASE_PASSWORD}
     driver-class-name: com.mysql.cj.jdbc.Driver
+
   jpa:
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
     hibernate:
@@ -19,3 +21,15 @@ spring:
     properties:
       hibernate:
         format_sql: false
+
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+
+oauth2:
+  kakao:
+    infoUrl: https://kapi.kakao.com
+    baseUrl: https://kauth.kakao.com
+    clientId: 0239e3b799683b851fa867e85be71696
+    redirectUri: http://localhost8080/api/login/oauth2/kakao/result
+    secretKey: ${SECRET_KEY}
