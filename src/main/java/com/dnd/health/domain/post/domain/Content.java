@@ -1,4 +1,4 @@
-package com.dnd.health.post.domain;
+package com.dnd.health.domain.post.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;

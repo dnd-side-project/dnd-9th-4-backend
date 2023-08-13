@@ -1,4 +1,4 @@
-package com.dnd.health.post.presentation.dto;
+package com.dnd.health.domain.post.presentation.dto;
 
 public class PostRegisterResponse {
 

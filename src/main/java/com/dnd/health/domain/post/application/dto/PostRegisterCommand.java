@@ -1,12 +1,12 @@
-package com.dnd.health.post.application.dto;
+package com.dnd.health.domain.post.application.dto;
 
-import com.dnd.health.member.domain.Member;
-import com.dnd.health.post.domain.Content;
-import com.dnd.health.post.domain.Post;
-import com.dnd.health.post.domain.Title;
-import com.dnd.health.post.domain.Wanted;
-import com.dnd.health.profile.domain.Region;
-import com.dnd.health.profile.domain.Sport;
+import com.dnd.health.domain.member.domain.Member;
+import com.dnd.health.domain.post.domain.Content;
+import com.dnd.health.domain.post.domain.Post;
+import com.dnd.health.domain.post.domain.Title;
+import com.dnd.health.domain.post.domain.Wanted;
+import com.dnd.health.domain.profile.domain.Region;
+import com.dnd.health.domain.profile.domain.Sport;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 

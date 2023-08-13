@@ -1,9 +1,9 @@
-package com.dnd.health.post.domain;
+package com.dnd.health.domain.post.domain;
 
 
-import com.dnd.health.member.domain.Member;
-import com.dnd.health.profile.domain.Region;
-import com.dnd.health.profile.domain.Sport;
+import com.dnd.health.domain.member.domain.Member;
+import com.dnd.health.domain.profile.domain.Region;
+import com.dnd.health.domain.profile.domain.Sport;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

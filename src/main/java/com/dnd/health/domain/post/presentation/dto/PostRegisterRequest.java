@@ -1,7 +1,7 @@
-package com.dnd.health.post.presentation.dto;
+package com.dnd.health.domain.post.presentation.dto;
 
-import com.dnd.health.post.application.dto.PostRegisterCommand;
-import com.dnd.health.profile.domain.Sport;
+import com.dnd.health.domain.post.application.dto.PostRegisterCommand;
+import com.dnd.health.domain.profile.domain.Sport;
 
 import java.util.List;
 

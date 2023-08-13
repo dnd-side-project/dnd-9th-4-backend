@@ -1,7 +1,10 @@
-package com.dnd.health.post.domain;
+package com.dnd.health.domain.post.domain;
+
+import lombok.Getter;
 
 import javax.persistence.Embeddable;
 
+@Getter
 @Embeddable
 public class Wanted {
 
@@ -36,8 +39,4 @@ public class Wanted {
     public static Wanted from(final String age, final String gender, final String runtime, final String periodEx) {
         return new Wanted(age, gender, runtime, periodEx);
     }
-
-//    public String to(){
-//        return this.value;
-//    }
 }

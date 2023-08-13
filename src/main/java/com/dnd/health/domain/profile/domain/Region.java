@@ -18,4 +18,8 @@ public class Region {
     public static Region from(final String region) {
         return new Region(region);
     }
+
+    public String to() {
+        return value;
+    }
 }
