@@ -1,21 +1,21 @@
 package com.dnd.health.profile.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Embeddable;
+import com.fasterxml.jackson.annotation.JsonCreator;
 
-@Embeddable
-public class Sport {
-    @Column(name = "sport_name")
-    private String value;
+public enum Sport {
+    FITNESS,
+    RUNNING,
+    CYCLE,
+    HIKING,
+    SWIM;
 
-    protected Sport() {
-    }
-
-    private Sport(String value) {
-        this.value = value;
-    }
-
-    public static Sport from(final String sport) {
-        return new Sport(sport);
+    @JsonCreator
+    public static Sport from(String value) {
+        for(Sport sport : Sport.values()) {
+            if(sport.name().equals(value)) {
+                return sport;
+            }
+        }
+        return null;
     }
 }

@@ -3,22 +3,15 @@ package com.dnd.health.profile.domain;
 import com.dnd.health.history.History;
 import com.dnd.health.member.domain.Member;
 import java.util.List;
-import javax.persistence.Column;
-import javax.persistence.Embedded;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import javax.persistence.*;
+
+import lombok.*;
 
 @Getter
 @Entity
+@Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor
 public class Profile {
 
     @Id
@@ -42,7 +35,8 @@ public class Profile {
     @Embedded
     private Region region;
 
-    @Embedded
+    @Enumerated(EnumType.STRING)
+    @Column(name = "sport")
     private Sport sport;
 
     @Embedded
