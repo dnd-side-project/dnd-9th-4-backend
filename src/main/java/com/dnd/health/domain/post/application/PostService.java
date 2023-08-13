@@ -49,8 +49,10 @@ public class PostService {
     }
 
     public PostResponse update(PostUpdateCommand command) {
-        Post post = postRepository.save(command.toDomain());
-        return new PostResponse(post);
+        Post post = postRepository.findById(command.getId())
+                .orElseThrow(() -> new PostNotFoundException(ErrorCode.POST_NOT_FOUND));
+        Post updatedPost = postRepository.save(command.toDomain(post.getMember()));
+        return new PostResponse(updatedPost);
     }
 
     public void delete(Long postId) {
@@ -64,7 +66,8 @@ public class PostService {
         Member member = memberRepository.findById(memberId)
                 .orElseThrow(() -> new MemberNotFoundException(ErrorCode.MEMBER_NOT_FOUND));
         List<Post> posts = postRepository.findAllByRegion(member.getProfile().getRegion());
-        return posts.subList(0,3).stream()
+        if(posts.size() >= 4) posts = posts.subList(0, 3);
+        return posts.stream()
                 .map(PostResponse::new)
                 .collect(Collectors.toList());
     }

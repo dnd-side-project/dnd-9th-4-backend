@@ -1,13 +1,11 @@
 package com.dnd.health.domain.post.presentation.dto;
 
-import com.dnd.health.domain.member.domain.Member;
 import com.dnd.health.domain.member.dto.response.MemberInfoResponse;
 import com.dnd.health.domain.post.domain.Post;
 import com.dnd.health.domain.profile.domain.Sport;
 import lombok.Getter;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Getter

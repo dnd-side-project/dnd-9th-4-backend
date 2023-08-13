@@ -39,9 +39,10 @@ public class PostUpdateCommand {
 
     private String runtime;
 
-    public Post toDomain() {
+    public Post toDomain(Member member) {
         return Post.builder()
                 .id(id)
+                .member(member)
                 .title(Title.from(title))
                 .content(Content.from(content))
                 .createdAt(LocalDateTime.now())
