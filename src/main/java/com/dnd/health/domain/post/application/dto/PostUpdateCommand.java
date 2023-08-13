@@ -8,10 +8,14 @@ import com.dnd.health.domain.post.domain.Wanted;
 import com.dnd.health.domain.profile.domain.Region;
 import com.dnd.health.domain.profile.domain.Sport;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
+@Getter
+@NoArgsConstructor
 @AllArgsConstructor
 public class PostUpdateCommand {
 

@@ -1,13 +1,16 @@
 package com.dnd.health.domain.post.presentation.dto;
 
 import com.dnd.health.domain.post.application.dto.PostRegisterCommand;
-import com.dnd.health.domain.profile.domain.Sport;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
+@Getter
+@NoArgsConstructor
 public class PostRegisterRequest {
 
-    private Sport sport;
+    private String sport;
 
     private List<String> exerciseStyles;
 
@@ -24,8 +27,6 @@ public class PostRegisterRequest {
     private String age;
 
     private String runtime;
-
-    private String periodEx;
 
     public PostRegisterCommand toCommand(Long memberId) {
         return new PostRegisterCommand(

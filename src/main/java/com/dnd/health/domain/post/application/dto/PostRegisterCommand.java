@@ -17,9 +17,9 @@ import java.util.List;
 @AllArgsConstructor
 public class PostRegisterCommand {
 
-    private Long memberId;
+    private long memberId;
 
-    private Sport sport;
+    private String sport;
 
     private List<String> exerciseStyles;
 
@@ -45,7 +45,7 @@ public class PostRegisterCommand {
                 .createdAt(LocalDateTime.now())
                 .exerciseStyles(exerciseStyles)
                 .interests(interests)
-                .sport(sport)
+                .sport(Sport.from(sport))
                 .region(Region.from(region))
                 .wanted(Wanted.from(age, gender, runtime))
                 .build();

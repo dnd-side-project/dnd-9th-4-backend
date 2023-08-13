@@ -2,9 +2,13 @@ package com.dnd.health.domain.post.presentation.dto;
 
 import com.dnd.health.domain.post.application.dto.PostUpdateCommand;
 import com.dnd.health.domain.profile.domain.Sport;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
+@Getter
+@NoArgsConstructor
 public class PostUpdateRequest {
 
     private Sport sport;
@@ -24,8 +28,6 @@ public class PostUpdateRequest {
     private String age;
 
     private String runtime;
-
-    private String periodEx;
 
     public PostUpdateCommand toCommand(Long postId) {
         return new PostUpdateCommand(

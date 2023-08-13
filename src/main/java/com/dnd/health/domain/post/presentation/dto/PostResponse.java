@@ -1,12 +1,16 @@
 package com.dnd.health.domain.post.presentation.dto;
 
+import com.dnd.health.domain.member.domain.Member;
 import com.dnd.health.domain.member.dto.response.MemberInfoResponse;
 import com.dnd.health.domain.post.domain.Post;
 import com.dnd.health.domain.profile.domain.Sport;
+import lombok.Getter;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
+@Getter
 public class PostResponse {
 
     private Long id;
@@ -37,8 +41,6 @@ public class PostResponse {
 
     private String runtime;
 
-    private String periodEx;
-
     private List<MemberInfoResponse> matchedMembers;
 
     private MemberInfoResponse selectedMember;
@@ -61,6 +63,6 @@ public class PostResponse {
         this.matchedMembers = post.getMatchedMembers().stream()
                 .map(MemberInfoResponse::new)
                 .collect(Collectors.toList());
-        this.selectedMember = new MemberInfoResponse(post.getSelectedMember());
+        this.selectedMember = post.getSelectedMember() == null ? null : new MemberInfoResponse(post.getSelectedMember());
     }
 }

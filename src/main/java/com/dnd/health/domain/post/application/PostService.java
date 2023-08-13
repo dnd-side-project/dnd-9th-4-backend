@@ -14,12 +14,14 @@ import com.dnd.health.domain.post.presentation.dto.PostResponse;
 import com.dnd.health.global.exception.ErrorCode;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class PostService {
 
     private final MemberRepository memberRepository;
@@ -28,6 +30,7 @@ public class PostService {
     public PostRegisterResponse save(PostRegisterCommand command) {
         Member member = memberRepository.findById(command.getMemberId())
                 .orElseThrow(() -> new MemberNotFoundException(ErrorCode.MEMBER_NOT_FOUND));
+        System.out.println("member = " + member.getUsername().to());
         Post post = command.toDomain(member);
         Post saved = postRepository.save(post);
         return new PostRegisterResponse(saved.getId());
