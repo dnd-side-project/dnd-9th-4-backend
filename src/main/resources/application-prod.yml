@@ -34,5 +34,5 @@ oauth2:
     infoUrl: https://kapi.kakao.com
     baseUrl: https://kauth.kakao.com
     clientId: 0239e3b799683b851fa867e85be71696
-    redirectUri: http://localhost8080/api/login/oauth2/kakao/result
+    redirectUri: https://dnd-9th-4-newple-app.vercel.app/auth
     secretKey: ${SECRET_KEY}
