@@ -59,7 +59,7 @@ public class SecurityConfig {
         @Override
         public void configure(HttpSecurity http) {
             http
-                    .addFilter(corsConfig.corsFilter())
+//                    .addFilter(corsConfig.corsFilter())
                     .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
         }
     }
