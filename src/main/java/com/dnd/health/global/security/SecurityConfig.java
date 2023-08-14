@@ -44,7 +44,7 @@ public class SecurityConfig {
 
         http
                 .authorizeRequests()
-                .antMatchers("/test", "/api/**").authenticated()
+                .antMatchers("/test").authenticated()
                 .antMatchers("/**").permitAll()
                 .and()
                 .apply(new MyCustomDsl());
