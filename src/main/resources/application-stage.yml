@@ -26,6 +26,10 @@ spring:
     pathmatch:
       matching-strategy: ant_path_matcher
 
+  sql:
+    init:
+      mode: never
+
 oauth2:
   kakao:
     infoUrl: https://kapi.kakao.com
