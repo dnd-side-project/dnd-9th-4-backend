@@ -8,6 +8,7 @@ import java.util.HashMap;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -32,8 +33,8 @@ public class OauthController {
     @ApiOperation(value = "카카오 로그인", notes = "카카오 로그인")
     @ResponseBody
     @GetMapping("/api/kakao/login")
-    public HashMap<String, Object> kakaoCallback(@ApiParam(value = "kakao auth code", required = true) @RequestParam String code) {
+    public ResponseEntity<HashMap<String, Object>> kakaoCallback(@ApiParam(value = "kakao auth code", required = true) @RequestParam String code) {
         String accessToken = oauthService.getKakaoAccessToken(code);
-        return oauthService.getUserKakaoInfo(accessToken);
+        return new ResponseEntity<>(oauthService.getUserKakaoInfo(accessToken), HttpStatus.OK);
     }
 }

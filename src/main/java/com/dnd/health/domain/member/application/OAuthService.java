@@ -33,7 +33,7 @@ public class OAuthService {
         String redirect_uri = "https://dnd-9th-4-newple-app.vercel.app/auth";
         String access_Token = "";
         String refresh_Token = "";
-        String reqURL = "https://kauth.kakao.com/oauth.token";
+        String reqURL = "https://kauth.kakao.com/oauth/token";
 
         try {
             URL url = new URL(reqURL);
