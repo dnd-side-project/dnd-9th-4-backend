@@ -1,7 +1,7 @@
 package com.dnd.health.domain.post.presentation.dto;
 
-import com.dnd.health.domain.member.dto.response.MemberInfoResponse;
 import com.dnd.health.domain.post.domain.Post;
+import com.dnd.health.domain.post.domain.PostStatus;
 import com.dnd.health.domain.profile.domain.Sport;
 import lombok.Getter;
 
@@ -39,9 +39,7 @@ public class PostResponse {
 
     private String runtime;
 
-    private List<MemberInfoResponse> matchedMembers;
-
-    private MemberInfoResponse selectedMember;
+    private PostStatus status;
 
     public PostResponse(Post post) {
         this.id = post.getId();
@@ -51,16 +49,17 @@ public class PostResponse {
         this.writerAge = post.getMember().getAge().to();
         this.sport = post.getSport();
         this.region = post.getRegion().to();
-        this.exerciseStyles = post.getExerciseStyles();
-        this.interests = post.getInterests();
+        this.exerciseStyles = post.getExerciseStyles().stream()
+                .map(style -> style.getValue())
+                .collect(Collectors.toList());
+        this.interests = post.getInterests().stream()
+                .map(interest -> interest.getValue())
+                .collect(Collectors.toList());
         this.title = post.getTitle().to();
         this.content = post.getContent().to();
         this.age = post.getWanted().getAge();
         this.gender = post.getWanted().getGender();
         this.runtime = post.getWanted().getRuntime();
-        this.matchedMembers = post.getMatchedMembers().stream()
-                .map(MemberInfoResponse::new)
-                .collect(Collectors.toList());
-        this.selectedMember = post.getSelectedMember() == null ? null : new MemberInfoResponse(post.getSelectedMember());
+        this.status = post.getStatus();
     }
 }

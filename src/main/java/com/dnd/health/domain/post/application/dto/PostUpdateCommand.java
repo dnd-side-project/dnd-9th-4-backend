@@ -1,10 +1,7 @@
 package com.dnd.health.domain.post.application.dto;
 
 import com.dnd.health.domain.member.domain.Member;
-import com.dnd.health.domain.post.domain.Content;
-import com.dnd.health.domain.post.domain.Post;
-import com.dnd.health.domain.post.domain.Title;
-import com.dnd.health.domain.post.domain.Wanted;
+import com.dnd.health.domain.post.domain.*;
 import com.dnd.health.domain.profile.domain.Region;
 import com.dnd.health.domain.profile.domain.Sport;
 import lombok.AllArgsConstructor;
@@ -13,6 +10,7 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Getter
 @NoArgsConstructor
@@ -46,8 +44,8 @@ public class PostUpdateCommand {
                 .title(Title.from(title))
                 .content(Content.from(content))
                 .createdAt(LocalDateTime.now())
-                .exerciseStyles(exerciseStyles)
-                .interests(interests)
+                .exerciseStyles(exerciseStyles.stream().map(ExerciseStyle::new).collect(Collectors.toList()))
+                .interests(interests.stream().map(Interest::new).collect(Collectors.toList()))
                 .sport(sport)
                 .region(Region.from(region))
                 .wanted(Wanted.from(age, gender, runtime))

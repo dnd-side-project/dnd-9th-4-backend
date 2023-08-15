@@ -46,11 +46,15 @@ public class Post {
     @Embedded
     private Wanted wanted;
 
-    @ElementCollection(targetClass = String.class)
-    private List<String> exerciseStyles;
+    @Builder.Default
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "style_id", referencedColumnName = "post_id")
+    private List<ExerciseStyle> exerciseStyles = new ArrayList<>();
 
-    @ElementCollection(targetClass = String.class)
-    private List<String> interests;
+    @Builder.Default
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "interest_id", referencedColumnName = "post_id")
+    private List<Interest> interests = new ArrayList<>();
 
     @Enumerated(EnumType.STRING)
     @Column(name = "sport")
@@ -60,11 +64,7 @@ public class Post {
     private Region region;
 
     @Builder.Default
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "member_id")
-    private List<Member> matchedMembers = new ArrayList<>();
-
-    @ManyToOne
-    @JoinColumn(referencedColumnName = "member_id", name = "selected_id")
-    private Member selectedMember;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status")
+    private PostStatus status = PostStatus.RECRUITING;
 }
