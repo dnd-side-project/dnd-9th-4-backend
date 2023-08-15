@@ -5,6 +5,7 @@ import com.dnd.health.global.exception.ErrorCode;
 
 public enum MatchStatus {
 
+    NOT_APPLY(Values.NOT_APPLY),
     APPLYING(Values.APPLYING),
     MATCHED(Values.MATCHED),
     REJECTED(Values.REJECTED);
