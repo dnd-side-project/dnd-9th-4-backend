@@ -36,4 +36,4 @@ oauth2:
     baseUrl: https://kauth.kakao.com
     clientId: 0239e3b799683b851fa867e85be71696
     redirectUri: https://dnd-9th-4-newple-app.vercel.app/auth
-    secretKey: ${SECRET_KEY}
+    secretKey: ribRjVO6H6cyZ1lztGKxpARTOHfxPGG0
