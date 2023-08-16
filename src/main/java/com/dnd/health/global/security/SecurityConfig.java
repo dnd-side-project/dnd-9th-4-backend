@@ -1,9 +1,9 @@
 package com.dnd.health.global.security;
 
 import com.dnd.health.global.jwt.filter.JwtAuthenticationFilter;
+import com.dnd.health.global.jwt.filter.JwtExceptionFilter;
 import com.dnd.health.global.jwt.handler.JwtAccessDeniedHandler;
 import com.dnd.health.global.jwt.handler.JwtAuthenticationEntryPoint;
-import com.dnd.health.domain.member.domain.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,8 +20,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SecurityConfig {
 
     private final CorsConfig corsConfig;
-    private final MemberRepository memberRepository;
     private final JwtAccessDeniedHandler jwtAccessDeniedHandler;
+    private final JwtExceptionFilter jwtExceptionFilter;
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
     private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
 
@@ -33,7 +33,7 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-                .cors()
+                .cors().configurationSource(corsConfig.corsConfigurationSource())
                 .and()
                 .csrf().disable()
                 .formLogin().disable()
@@ -45,7 +45,9 @@ public class SecurityConfig {
                 .antMatchers("/test").authenticated()
                 .antMatchers("/**").permitAll()
                 .and()
-                .apply(new MyCustomDsl());
+//                .apply(new MyCustomDsl());
+                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
+                        .addFilterBefore(jwtExceptionFilter, JwtAuthenticationFilter.class);
 
         http.exceptionHandling()
                 .authenticationEntryPoint(jwtAuthenticationEntryPoint)
