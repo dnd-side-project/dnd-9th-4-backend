@@ -118,6 +118,7 @@ public class OAuthService {
 
             userInfo.put("nickname", nickname);
             userInfo.put("id", id);
+            userInfo.put("email", email);
 
         } catch (IOException e) {
             throw new RuntimeException(e);

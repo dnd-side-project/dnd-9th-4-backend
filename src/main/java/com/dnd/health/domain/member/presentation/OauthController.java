@@ -21,20 +21,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequiredArgsConstructor
 public class OauthController {
-    OAuthService oauthService;
 
-//    @ApiOperation(value = "카카오 로그인", notes = "카카오 로그인")
-//    @ResponseBody
-//    @GetMapping("/api/v1/kakao")
-//    public void kakaoCallback(@ApiParam(value = "kakao auth code", required = true) @RequestParam String code) {
-//        String accessToken = oauthService.getKakaoAccessToken(code);
-//        return BaseResponse(oauthService.kakaoLogin(accessToken).getStatus(), "요청 성공했습니다.", oauthService.kakaoLogin(accessToken));
-//    }
+    OAuthService oauthService;
 
     @ApiOperation(value = "카카오 로그인", notes = "카카오 로그인")
     @ResponseBody
     @GetMapping("/api/kakao/login")
-    @CrossOrigin(origins = "https://dnd-9th-4-newple-app.vercel.app/%22")
+    @CrossOrigin(origins = "https://dnd-9th-4-newple-app.vercel.app")
     public ResponseEntity<HashMap<String, Object>> kakaoCallback(@ApiParam(value = "kakao auth code", required = true) @RequestParam String code) {
         String accessToken = oauthService.getKakaoAccessToken(code);
         return new ResponseEntity<>(oauthService.getUserKakaoInfo(accessToken), HttpStatus.OK);

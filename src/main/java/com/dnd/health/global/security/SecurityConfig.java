@@ -32,14 +32,12 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.cors()
+        http
+                .cors()
                 .and()
-                .csrf()
-                .and()
-                .formLogin()
-                .and()
-                .httpBasic()
-                .disable()
+                .csrf().disable()
+                .formLogin().disable()
+                .httpBasic().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
         http
@@ -59,7 +57,7 @@ public class SecurityConfig {
         @Override
         public void configure(HttpSecurity http) {
             http
-//                    .addFilter(corsConfig.corsFilter())
+                    .addFilter(corsConfig.corsFilter())
                     .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
         }
     }

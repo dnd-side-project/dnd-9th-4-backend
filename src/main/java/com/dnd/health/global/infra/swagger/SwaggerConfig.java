@@ -43,6 +43,7 @@ public class SwaggerConfig {
                 .select()
                 .apis(withoutMethodAnnotation(PreAuthorize.class))
                 .apis(RequestHandlerSelectors.basePackage("com.dnd.health.domain"))
+                .apis(RequestHandlerSelectors.basePackage("com.dnd.health"))
                 .build()
                 .apiInfo(apiInfo());
     }
@@ -87,7 +88,7 @@ public class SwaggerConfig {
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
                 .title("NewPle Swagger API")
-                .description("DND 9th 4조의 Swagger docs 입니다.")
+                .description("DND 9th 4조 Swagger docs")
                 .version("1.0")
                 .build();
     }

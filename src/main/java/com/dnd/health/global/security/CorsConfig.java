@@ -14,7 +14,8 @@ public class CorsConfig {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowCredentials(true);
-        config.addAllowedOrigin("*"); // e.g. http://domain1.com
+        config.addAllowedOrigin("http://localhost:3000");// e.g. http://domain1.com
+        config.addAllowedOrigin("https://dnd-9th-4-newple-app.vercel.app");
         config.addAllowedHeader("*");
         config.addAllowedMethod("*");
 
