@@ -27,7 +27,6 @@ public class OauthController {
     @ApiOperation(value = "카카오 로그인", notes = "카카오 로그인")
     @ResponseBody
     @GetMapping("/api/kakao/login")
-    @CrossOrigin(origins = "https://dnd-9th-4-newple-app.vercel.app")
     public ResponseEntity<HashMap<String, Object>> kakaoCallback(@ApiParam(value = "kakao auth code", required = true) @RequestParam String code) {
         String accessToken = oauthService.getKakaoAccessToken(code);
         return new ResponseEntity<>(oauthService.getUserKakaoInfo(accessToken), HttpStatus.OK);
