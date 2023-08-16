@@ -13,6 +13,7 @@ import com.dnd.health.global.jwt.dto.SessionUser;
 import com.dnd.health.global.response.DataResponse;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import java.util.Map;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
@@ -23,6 +24,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -72,8 +74,9 @@ public class MemberController {
             value = "카카오 계정 회원가입",
             notes = "인가 코드를 입력하고 요청보내면, 사용자의 정보를 저장한 후 사용자의 Id를 확인할 수 있습니다.")
     @PostMapping("/api/v1/kakao/signup")
-    public ResponseEntity<DataResponse<MemberSimpleInfoResponse>> kakaoLogin(@RequestParam("code") String code) {
-
+    public ResponseEntity<DataResponse<MemberSimpleInfoResponse>> kakaoLogin(@RequestBody Map<String, String> request) {
+        String code = request.get("code");
+        
         //코드를 통해 액세스 토큰 발급한 후, 유저 정보를 가져온다.
         KakaoUserInfoResponse kakaoUserInfo = kakaoFeignService.getKakaoInfoWithToken(code);
         LoginResponse kakaoLoginResponse = memberSignUpService.loginKakaoMember(kakaoUserInfo);
