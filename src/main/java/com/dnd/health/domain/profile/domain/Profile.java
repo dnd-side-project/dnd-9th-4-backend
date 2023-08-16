@@ -48,4 +48,6 @@ public class Profile {
     @Embedded
     private PeriodEx periodEx;
 
+    private String profileImg;
+
 }
