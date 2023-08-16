@@ -44,7 +44,6 @@ public class MemberController {
             value = "게스트 회원가입",
             notes = "요청 보내면 바로 게스트가 생성되고, accessToken이 발급됩니다.")
     @PostMapping("/api/v1/guest/signup")
-    @CrossOrigin(origins = "https://dnd-9th-4-newple-app.vercel.app")
     public ResponseEntity<DataResponse<MemberSimpleInfoResponse>> guestLogin() {
 
         LoginResponse guestLoginResponse = memberSignUpService.loginGuestMember();
@@ -61,7 +60,6 @@ public class MemberController {
             value = "인가 코드 발급",
             notes = "해당 url을 통해 로그인 화면으로 넘어간 후, 사용자가 정보를 입력하면 redirect url에서 코드를 발급할 수 있습니다.")
     @GetMapping("/api/v1/kakao/login")
-    @CrossOrigin(origins = "https://dnd-9th-4-newple-app.vercel.app")
     public ResponseEntity<HttpHeaders> getKakaoAuthCode()  {
         HttpHeaders httpHeaders = kakaoFeignService.kakaoLogin();
         return new ResponseEntity<>(httpHeaders, HttpStatus.SEE_OTHER);
@@ -74,7 +72,6 @@ public class MemberController {
             value = "카카오 계정 회원가입",
             notes = "인가 코드를 입력하고 요청보내면, 사용자의 정보를 저장한 후 사용자의 Id를 확인할 수 있습니다.")
     @PostMapping("/api/v1/kakao/signup")
-    @CrossOrigin(origins = "https://dnd-9th-4-newple-app.vercel.app")
     public ResponseEntity<DataResponse<MemberSimpleInfoResponse>> kakaoLogin(@RequestParam("code") String code) {
 
         //코드를 통해 액세스 토큰 발급한 후, 유저 정보를 가져온다.
