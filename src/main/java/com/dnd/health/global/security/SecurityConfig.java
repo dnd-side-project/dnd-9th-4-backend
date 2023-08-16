@@ -57,12 +57,12 @@ public class SecurityConfig {
         return http.build();
     }
 
-    public class MyCustomDsl extends AbstractHttpConfigurer<MyCustomDsl, HttpSecurity> {
-        @Override
-        public void configure(HttpSecurity http) {
-            http
-                    .addFilter(corsConfig.corsFilter())
-                    .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
-        }
-    }
+//    public class MyCustomDsl extends AbstractHttpConfigurer<MyCustomDsl, HttpSecurity> {
+//        @Override
+//        public void configure(HttpSecurity http) {
+//            http
+//                    .addFilter(corsConfig.corsFilter())
+//                    .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
+//        }
+//    }
 }
