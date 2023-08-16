@@ -19,7 +19,7 @@ public class History {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "member_id")
+    @Column(name = "history_id")
     private long id;
 
     @ManyToOne

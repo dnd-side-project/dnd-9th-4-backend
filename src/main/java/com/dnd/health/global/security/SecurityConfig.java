@@ -46,7 +46,6 @@ public class SecurityConfig {
                 .antMatchers("/test").authenticated()
                 .antMatchers("/**").permitAll()
                 .and()
-//                .apply(new MyCustomDsl());
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
                 .addFilterBefore(jwtExceptionFilter, JwtAuthenticationFilter.class);
 
@@ -55,13 +54,4 @@ public class SecurityConfig {
                 .accessDeniedHandler(jwtAccessDeniedHandler);
         return http.build();
     }
-
-//    public class MyCustomDsl extends AbstractHttpConfigurer<MyCustomDsl, HttpSecurity> {
-//        @Override
-//        public void configure(HttpSecurity http) {
-//            http
-//                    .addFilter(corsConfig.corsFilter())
-//                    .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
-//        }
-//    }
 }
