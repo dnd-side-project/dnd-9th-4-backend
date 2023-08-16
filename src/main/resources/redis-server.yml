@@ -1,7 +1,0 @@
-# redis-server.yml
-# Redis 연결 설정
-spring:
-  redis:
-    host: 15.164.162.77
-    port: 6379
-    password: dnd94

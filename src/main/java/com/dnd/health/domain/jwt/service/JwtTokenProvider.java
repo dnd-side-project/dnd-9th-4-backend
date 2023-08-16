@@ -1,9 +1,7 @@
-package com.dnd.health.global.jwt.service;
+package com.dnd.health.domain.jwt.service;
 
-import com.dnd.health.global.infra.redis.RefreshToken;
-import com.dnd.health.global.infra.redis.RefreshTokenRepository;
-import com.dnd.health.global.jwt.JwtProperties;
-import com.dnd.health.global.jwt.dto.SessionUser;
+import com.dnd.health.domain.jwt.JwtProperties;
+import com.dnd.health.domain.jwt.dto.SessionUser;
 import com.dnd.health.domain.member.domain.Member;
 import com.dnd.health.domain.member.domain.MemberRepository;
 import com.dnd.health.domain.member.domain.Role;
@@ -45,7 +43,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class JwtTokenProvider {
 
     private final MemberRepository memberRepository;
-    private final RefreshTokenRepository refreshTokenRepository;
+//    private final RefreshTokenRepository refreshTokenRepository;
 
     //  jwt를 생성해주는 secretKey
     private static String secretKey = JwtProperties.SECRET;
@@ -124,8 +122,8 @@ public class JwtTokenProvider {
                 .setExpiration(validity)
                 .compact();
 
-        RefreshToken token = new RefreshToken(memberId, refreshToken);
-        refreshTokenRepository.save(token);
+//        RefreshToken token = new RefreshToken(memberId, refreshToken);
+//        refreshTokenRepository.save(token);
         return refreshToken;
     }
 
@@ -157,7 +155,7 @@ public class JwtTokenProvider {
         return (Duration.between(now, expiration).compareTo(Duration.ofDays(3)) >= 0);
     }
 
-    public void saveRefreshTokenInRedis(Member member, String refreshToken) {
-        refreshTokenRepository.save(new RefreshToken(member.getId(), refreshToken));
-    }
+//    public void saveRefreshTokenInRedis(Member member, String refreshToken) {
+//        refreshTokenRepository.save(new RefreshToken(member.getId(), refreshToken));
+//    }
 }

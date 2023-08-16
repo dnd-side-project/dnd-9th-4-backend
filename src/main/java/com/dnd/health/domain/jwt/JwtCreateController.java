@@ -1,4 +1,4 @@
-package com.dnd.health.global.jwt;
+package com.dnd.health.domain.jwt;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;

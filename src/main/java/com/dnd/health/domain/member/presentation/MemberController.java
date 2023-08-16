@@ -9,7 +9,7 @@ import com.dnd.health.domain.member.dto.response.MemberInfoResponse;
 import com.dnd.health.domain.member.dto.response.MemberSimpleInfoResponse;
 import com.dnd.health.global.infra.feign.dto.response.KakaoUserInfoResponse;
 import com.dnd.health.global.infra.feign.sevice.KakaoFeignService;
-import com.dnd.health.global.jwt.dto.SessionUser;
+import com.dnd.health.domain.jwt.dto.SessionUser;
 import com.dnd.health.global.response.DataResponse;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -21,12 +21,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @Slf4j
@@ -76,7 +73,7 @@ public class MemberController {
     @PostMapping("/api/v1/kakao/signup")
     public ResponseEntity<DataResponse<MemberSimpleInfoResponse>> kakaoLogin(@RequestBody Map<String, String> request) {
         String code = request.get("code");
-        
+
         //코드를 통해 액세스 토큰 발급한 후, 유저 정보를 가져온다.
         KakaoUserInfoResponse kakaoUserInfo = kakaoFeignService.getKakaoInfoWithToken(code);
         LoginResponse kakaoLoginResponse = memberSignUpService.loginKakaoMember(kakaoUserInfo);

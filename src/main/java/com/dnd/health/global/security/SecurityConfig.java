@@ -1,15 +1,14 @@
 package com.dnd.health.global.security;
 
-import com.dnd.health.global.jwt.filter.JwtAuthenticationFilter;
-import com.dnd.health.global.jwt.filter.JwtExceptionFilter;
-import com.dnd.health.global.jwt.handler.JwtAccessDeniedHandler;
-import com.dnd.health.global.jwt.handler.JwtAuthenticationEntryPoint;
+import com.dnd.health.domain.jwt.filter.JwtAuthenticationFilter;
+import com.dnd.health.domain.jwt.filter.JwtExceptionFilter;
+import com.dnd.health.domain.jwt.handler.JwtAccessDeniedHandler;
+import com.dnd.health.domain.jwt.handler.JwtAuthenticationEntryPoint;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;

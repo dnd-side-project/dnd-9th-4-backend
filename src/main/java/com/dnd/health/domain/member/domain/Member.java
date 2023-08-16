@@ -60,6 +60,8 @@ public class Member {
     @Column(name = "role")
     private Role role;
 
+    private String profileUrl;
+
     @OneToMany(mappedBy = "sender", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Message> sentMessages;
 
@@ -91,7 +93,8 @@ public class Member {
         this.role = newRole;
     }
 
-    public void updateInfo(String username) {
+    public void updateInfo(String profileUrl, String username) {
+        this.profileUrl = profileUrl;
         this.username = Username.from(username);
     }
 }

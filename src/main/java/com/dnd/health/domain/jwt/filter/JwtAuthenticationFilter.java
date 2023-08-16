@@ -1,8 +1,8 @@
-package com.dnd.health.global.jwt.filter;
+package com.dnd.health.domain.jwt.filter;
 
 import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 
-import com.dnd.health.global.jwt.service.JwtTokenProvider;
+import com.dnd.health.domain.jwt.service.JwtTokenProvider;
 import java.io.IOException;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;

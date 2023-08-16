@@ -4,8 +4,8 @@ package com.dnd.health.domain.member.application;
 import com.dnd.health.domain.member.dto.response.LoginResponse;
 import com.dnd.health.domain.member.dto.response.MemberSimpleInfoResponse;
 import com.dnd.health.global.infra.feign.dto.response.KakaoUserInfoResponse;
-import com.dnd.health.global.jwt.dto.ReIssueToken;
-import com.dnd.health.global.jwt.service.JwtTokenProvider;
+import com.dnd.health.domain.jwt.dto.ReIssueToken;
+import com.dnd.health.domain.jwt.service.JwtTokenProvider;
 import com.dnd.health.global.util.CookieUtil;
 import com.dnd.health.global.util.HttpHeaderUtil;
 import com.dnd.health.domain.member.domain.Member;
@@ -55,7 +55,7 @@ public class MemberSignUpService {
         String refreshToken = jwtTokenProvider.createRefreshToken(member.getId());
 
         // refreshToken은 redis에 따로 저장해둔다.
-        jwtTokenProvider.saveRefreshTokenInRedis(member, refreshToken);
+//        jwtTokenProvider.saveRefreshTokenInRedis(member, refreshToken);
         return new LoginResponse(accessToken, refreshToken, new MemberSimpleInfoResponse(member));
     }
 
@@ -65,7 +65,7 @@ public class MemberSignUpService {
     }
 
     private void updateMemberInfo(KakaoUserInfoResponse kakaoUserInfo, Member member) {
-        member.updateInfo(kakaoUserInfo.getUsername());
+        member.updateInfo(kakaoUserInfo.getProfileImg(), kakaoUserInfo.getUsername());
     }
 
     public static HttpHeaders setCookieAndHeader(LoginResponse loginResult) {
