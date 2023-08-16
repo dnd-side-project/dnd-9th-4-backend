@@ -20,6 +20,8 @@ public class MatchApplicantResponse {
 
     private String age;
 
+    private String profileImg;
+
     private MatchStatus matchStatus;
 
     public MatchApplicantResponse(Match match) {
@@ -27,6 +29,7 @@ public class MatchApplicantResponse {
         this.username = match.getMember().getUsername().to();
         this.gender = match.getMember().getGender().to();
         this.age = match.getMember().getAge().to();
+        this.profileImg = match.getMember().getProfile().getProfileImg();
         this.matchStatus = match.getMatchStatus();
     }
 }

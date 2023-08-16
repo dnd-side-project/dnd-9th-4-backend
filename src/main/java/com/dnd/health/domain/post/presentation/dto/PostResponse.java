@@ -21,6 +21,8 @@ public class PostResponse {
 
     private String writerGender;
 
+    private String writerProfileImg;
+
     private Sport sport;
 
     private List<String> exerciseStyles;
@@ -47,6 +49,7 @@ public class PostResponse {
         this.writerUsername = post.getMember().getUsername().to();
         this.writerGender = post.getMember().getGender().to();
         this.writerAge = post.getMember().getAge().to();
+        this.writerProfileImg = post.getMember().getProfile().getProfileImg();
         this.sport = post.getSport();
         this.region = post.getRegion().to();
         this.exerciseStyles = post.getExerciseStyles().stream()
