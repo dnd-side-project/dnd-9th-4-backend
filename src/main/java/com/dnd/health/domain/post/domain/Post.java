@@ -12,6 +12,7 @@ import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,9 +40,9 @@ public class Post {
     @Embedded
     private Content content;
 
-    @Column(updatable = false)
+    @Column(updatable = false, name = "written_date")
     @CreatedDate
-    private LocalDateTime createdAt;
+    private LocalDateTime writtenDate;
 
     @Embedded
     private Wanted wanted;
@@ -67,4 +68,11 @@ public class Post {
     @Enumerated(EnumType.STRING)
     @Column(name = "status")
     private PostStatus status = PostStatus.RECRUITING;
+
+    @PrePersist
+    public void onPrePersist() {
+        String customLocalDateTimeFormat = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyy-MM-dd HH:mm:ss"));
+        LocalDateTime parsedCreateDate = LocalDateTime.parse(customLocalDateTimeFormat, DateTimeFormatter.ofPattern("yyy-MM-dd HH:mm:ss"));
+        this.writtenDate = parsedCreateDate;
+    }
 }
