@@ -4,9 +4,9 @@ server:
 
 spring:
   datasource:
-    url: jdbc:mysql://dnd-health.cade1afm85pd.ap-northeast-2.rds.amazonaws.com:3306/dnd-health
-    username: admin
-    password: dnd12345678
+    url: ${DATABASE_URL}
+    username: ${DATABASE_USERNAME}
+    password: ${DATABASE_PASSWORD}
     driver-class-name: com.mysql.cj.jdbc.Driver
 
   jpa:
@@ -35,4 +35,4 @@ oauth2:
     baseUrl: https://kauth.kakao.com
     clientId: 0239e3b799683b851fa867e85be71696
     redirectUri: https://dnd-9th-4-newple-app.vercel.app/auth
-    secretKey: ribRjVO6H6cyZ1lztGKxpARTOHfxPGG0
+    secretKey: ${SECRET_KEY}
