@@ -38,6 +38,7 @@ public class Member {
     private ProviderId providerId;
 
     @Enumerated(EnumType.STRING)
+    @Column(name = "oauth2_Provider")
     private OAuth2Provider oauth2Provider;
 
     @Embedded
