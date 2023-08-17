@@ -9,11 +9,13 @@ import javax.persistence.*;
 @Entity
 @Getter
 @Builder
+@Table(name = "matchs")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 public class Match {
 
     @Id
+    @Column(name = "match_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 

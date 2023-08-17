@@ -1,7 +1,7 @@
 package com.dnd.health.domain.post.presentation.dto;
 
 import com.dnd.health.domain.post.application.dto.PostUpdateCommand;
-import com.dnd.health.domain.profile.domain.Sport;
+import com.dnd.health.domain.common.Sport;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 

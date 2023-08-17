@@ -1,6 +1,5 @@
 package com.dnd.health.global;
 
-import org.springframework.boot.web.embedded.tomcat.TomcatConnectorCustomizer;
 import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;
 import org.springframework.boot.web.server.WebServerFactoryCustomizer;
 import org.springframework.context.annotation.Configuration;
@@ -9,7 +8,6 @@ import org.springframework.context.annotation.Configuration;
 public class TomcatWebCustomConfig implements WebServerFactoryCustomizer<TomcatServletWebServerFactory> {
     @Override
     public void customize(final TomcatServletWebServerFactory factory) {
-        factory.addConnectorCustomizers((TomcatConnectorCustomizer)
-                connector -> connector.setProperty("relaxedQueryChars", "%{}*"));
+        factory.addConnectorCustomizers(connector -> connector.setProperty("relaxedQueryChars", "<>[\\]^`{|}"));
     }
 }

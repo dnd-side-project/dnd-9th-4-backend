@@ -1,5 +1,6 @@
 package com.dnd.health.domain.post.domain;
 
+import javax.persistence.Column;
 import lombok.Getter;
 
 import javax.persistence.Embeddable;
@@ -8,10 +9,13 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class Wanted {
 
+    @Column(name = "wanted_age")
     private String age;
 
+    @Column(name = "wanted_gender")
     private String gender;
 
+    @Column(name = "wanted_runtime")
     private String runtime;
 
     protected Wanted() {

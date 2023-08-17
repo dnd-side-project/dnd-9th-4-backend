@@ -1,5 +1,6 @@
 package com.dnd.health.domain.profile.domain;
 
+import javax.persistence.Column;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,6 +16,7 @@ import javax.persistence.Id;
 public class Interest {
 
     @Id
+    @Column(name = "interest_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 

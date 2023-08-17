@@ -1,4 +1,4 @@
-package com.dnd.health.domain.profile.domain;
+package com.dnd.health.domain.common;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 

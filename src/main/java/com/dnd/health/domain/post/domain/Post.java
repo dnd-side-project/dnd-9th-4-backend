@@ -2,8 +2,7 @@ package com.dnd.health.domain.post.domain;
 
 
 import com.dnd.health.domain.member.domain.Member;
-import com.dnd.health.domain.profile.domain.Region;
-import com.dnd.health.domain.profile.domain.Sport;
+import com.dnd.health.domain.common.Sport;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -52,7 +51,7 @@ public class Post {
     private Sport sport;
 
     @Embedded
-    private Region region;
+    private PostRegion region;
 
     @Builder.Default
     @Enumerated(EnumType.STRING)
@@ -61,7 +60,7 @@ public class Post {
 
     @Builder.Default
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "post_tag_id", referencedColumnName = "post_id")
+    @JoinColumn(name = "post_id", referencedColumnName = "post_id")
     private List<PostTag> tags = new ArrayList<>();
 
     @PrePersist

@@ -1,5 +1,6 @@
 package com.dnd.health.domain.profile.domain;
 
+import com.dnd.health.domain.common.Sport;
 import com.dnd.health.domain.history.History;
 import com.dnd.health.domain.member.domain.Member;
 
@@ -44,7 +45,7 @@ public class Profile {
     private Region region;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "sport")
+    @Column(name = "sport_name")
     private Sport sport;
 
     @Embedded

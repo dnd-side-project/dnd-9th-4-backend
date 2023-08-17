@@ -2,7 +2,7 @@ package com.dnd.health.domain.post.presentation.dto;
 
 import com.dnd.health.domain.post.domain.Post;
 import com.dnd.health.domain.post.domain.PostStatus;
-import com.dnd.health.domain.profile.domain.Sport;
+import com.dnd.health.domain.common.Sport;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 

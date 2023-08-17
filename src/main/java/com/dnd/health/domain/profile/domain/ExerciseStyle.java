@@ -13,6 +13,7 @@ import javax.persistence.*;
 public class ExerciseStyle {
 
     @Id
+    @Column(name = "exercise_style")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
