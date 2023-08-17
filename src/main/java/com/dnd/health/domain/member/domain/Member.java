@@ -1,6 +1,6 @@
 package com.dnd.health.domain.member.domain;
 
-import com.dnd.health.domain.message.Message;
+import com.dnd.health.domain.message.domain.Message;
 import com.dnd.health.domain.profile.domain.Profile;
 import java.util.List;
 import javax.persistence.CascadeType;
