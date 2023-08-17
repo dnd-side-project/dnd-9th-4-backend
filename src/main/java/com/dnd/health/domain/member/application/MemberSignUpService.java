@@ -4,12 +4,11 @@ package com.dnd.health.domain.member.application;
 import com.dnd.health.domain.member.dto.response.LoginResponse;
 import com.dnd.health.domain.member.dto.response.MemberSimpleInfoResponse;
 import com.dnd.health.global.infra.feign.dto.response.KakaoUserInfoResponse;
-import com.dnd.health.global.jwt.dto.ReIssueToken;
-import com.dnd.health.global.jwt.service.JwtTokenProvider;
+import com.dnd.health.domain.jwt.dto.ReIssueToken;
+import com.dnd.health.domain.jwt.service.JwtTokenProvider;
 import com.dnd.health.global.util.CookieUtil;
 import com.dnd.health.global.util.HttpHeaderUtil;
 import com.dnd.health.domain.member.domain.Member;
-import com.dnd.health.domain.member.domain.OAuth2Provider;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -31,8 +30,8 @@ public class MemberSignUpService {
 
     public LoginResponse loginKakaoMember(KakaoUserInfoResponse kakaoUserInfo) {
         //카카오 회원 Id를 변조해서 검사해본다.(회원 Id로 해야만 고유성을 가질 수 있기 때문에)
-        String userNumber = String.format("%s#%s", OAuth2Provider.KAKAO, kakaoUserInfo.getId());
-        Optional<Member> loginMember = memberService.getMemberByUserNumber(userNumber);
+        String username = kakaoUserInfo.getUsername();
+        Optional<Member> loginMember = memberService.getMemberByUserName(username);
 
         //만약 존재한다면, update 친다.
         if(loginMember.isPresent()) {
@@ -55,7 +54,7 @@ public class MemberSignUpService {
         String refreshToken = jwtTokenProvider.createRefreshToken(member.getId());
 
         // refreshToken은 redis에 따로 저장해둔다.
-        jwtTokenProvider.saveRefreshTokenInRedis(member, refreshToken);
+//        jwtTokenProvider.saveRefreshTokenInRedis(member, refreshToken);
         return new LoginResponse(accessToken, refreshToken, new MemberSimpleInfoResponse(member));
     }
 
@@ -65,7 +64,7 @@ public class MemberSignUpService {
     }
 
     private void updateMemberInfo(KakaoUserInfoResponse kakaoUserInfo, Member member) {
-        member.updateInfo(kakaoUserInfo.getUsername());
+        member.updateInfo(kakaoUserInfo.getProfileImg(), kakaoUserInfo.getUsername());
     }
 
     public static HttpHeaders setCookieAndHeader(LoginResponse loginResult) {

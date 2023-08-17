@@ -1,6 +1,6 @@
 package com.dnd.health.global.util;
 
-import static com.dnd.health.global.jwt.service.JwtTokenProvider.REFRESH_TOKEN_EXPIRE_LENGTH_MS;
+import static com.dnd.health.domain.jwt.service.JwtTokenProvider.REFRESH_TOKEN_EXPIRE_LENGTH_MS;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseCookie;

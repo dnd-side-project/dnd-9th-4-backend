@@ -18,4 +18,8 @@ public class Age {
     public static Age from(final String age) {
         return new Age(age);
     }
+
+    public String to() {
+        return this.value;
+    }
 }
