@@ -18,4 +18,8 @@ public class Gender {
     public static Gender from(final String gender) {
         return new Gender(gender);
     }
+
+    public String to() {
+        return this.value;
+    }
 }
