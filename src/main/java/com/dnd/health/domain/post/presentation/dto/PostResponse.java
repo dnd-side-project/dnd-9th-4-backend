@@ -30,9 +30,7 @@ public class PostResponse {
 
     private Sport sport;
 
-    private List<String> exerciseStyles;
-
-    private List<String> interests;
+    private List<String> tags;
 
     private String title;
 
@@ -58,11 +56,8 @@ public class PostResponse {
         this.writtenDate = post.getWrittenDate();
         this.sport = post.getSport();
         this.region = post.getRegion().to();
-        this.exerciseStyles = post.getExerciseStyles().stream()
-                .map(style -> style.getValue())
-                .collect(Collectors.toList());
-        this.interests = post.getInterests().stream()
-                .map(interest -> interest.getValue())
+        this.tags = post.getTags().stream()
+                .map(tag -> tag.getTag())
                 .collect(Collectors.toList());
         this.title = post.getTitle().to();
         this.content = post.getContent().to();

@@ -2,6 +2,8 @@ package com.dnd.health.domain.profile.domain;
 
 import com.dnd.health.domain.history.History;
 import com.dnd.health.domain.member.domain.Member;
+
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.*;
 
@@ -43,5 +45,15 @@ public class Profile {
     private PeriodEx periodEx;
 
     private String profileImg;
+
+    @Builder.Default
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "style_id", referencedColumnName = "post_id")
+    private List<ExerciseStyle> exerciseStyles = new ArrayList<>();
+
+    @Builder.Default
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "interest_id", referencedColumnName = "post_id")
+    private List<Interest> interests = new ArrayList<>();
 
 }

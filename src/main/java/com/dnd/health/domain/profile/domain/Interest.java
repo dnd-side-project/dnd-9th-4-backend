@@ -1,4 +1,4 @@
-package com.dnd.health.domain.post.domain;
+package com.dnd.health.domain.profile.domain;
 
 import lombok.AccessLevel;
 import lombok.Getter;

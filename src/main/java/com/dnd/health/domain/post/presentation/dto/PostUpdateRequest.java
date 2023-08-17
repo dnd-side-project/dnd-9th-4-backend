@@ -13,9 +13,7 @@ public class PostUpdateRequest {
 
     private Sport sport;
 
-    private List<String> exerciseStyles;
-
-    private List<String> interests;
+    private List<String> tags;
 
     private String title;
 
@@ -33,8 +31,7 @@ public class PostUpdateRequest {
         return new PostUpdateCommand(
                 postId,
                 sport,
-                exerciseStyles,
-                interests,
+                tags,
                 title,
                 content,
                 region,

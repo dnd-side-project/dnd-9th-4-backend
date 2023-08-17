@@ -1,6 +1,5 @@
 package com.dnd.health.domain.post.application;
 
-import com.dnd.health.domain.match.domain.MatchingRepository;
 import com.dnd.health.domain.member.domain.Member;
 import com.dnd.health.domain.member.domain.MemberRepository;
 import com.dnd.health.domain.member.exception.MemberNotFoundException;

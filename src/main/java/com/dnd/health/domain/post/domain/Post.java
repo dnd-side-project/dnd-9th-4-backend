@@ -47,16 +47,6 @@ public class Post {
     @Embedded
     private Wanted wanted;
 
-    @Builder.Default
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "style_id", referencedColumnName = "post_id")
-    private List<ExerciseStyle> exerciseStyles = new ArrayList<>();
-
-    @Builder.Default
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "interest_id", referencedColumnName = "post_id")
-    private List<Interest> interests = new ArrayList<>();
-
     @Enumerated(EnumType.STRING)
     @Column(name = "sport")
     private Sport sport;
@@ -68,6 +58,11 @@ public class Post {
     @Enumerated(EnumType.STRING)
     @Column(name = "status")
     private PostStatus status = PostStatus.RECRUITING;
+
+    @Builder.Default
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "post_tag_id", referencedColumnName = "post_id")
+    private List<PostTag> tags = new ArrayList<>();
 
     @PrePersist
     public void onPrePersist() {

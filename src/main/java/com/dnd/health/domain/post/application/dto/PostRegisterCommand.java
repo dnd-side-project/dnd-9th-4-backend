@@ -19,9 +19,7 @@ public class PostRegisterCommand {
 
     private String sport;
 
-    private List<String> exerciseStyles;
-
-    private List<String> interests;
+    private List<String> tags;
 
     private String title;
 
@@ -40,9 +38,7 @@ public class PostRegisterCommand {
                 .member(member)
                 .title(Title.from(title))
                 .content(Content.from(content))
-                .createdAt(LocalDateTime.now())
-                .exerciseStyles(exerciseStyles.stream().map(ExerciseStyle::new).collect(Collectors.toList()))
-                .interests(interests.stream().map(Interest::new).collect(Collectors.toList()))
+                .tags(tags.stream().map(PostTag::new).collect(Collectors.toList()))
                 .sport(Sport.from(sport))
                 .region(Region.from(region))
                 .wanted(Wanted.from(age, gender, runtime))

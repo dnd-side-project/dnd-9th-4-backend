@@ -2,6 +2,8 @@ package com.dnd.health.domain.post.application.dto;
 
 import com.dnd.health.domain.member.domain.Member;
 import com.dnd.health.domain.post.domain.*;
+import com.dnd.health.domain.profile.domain.ExerciseStyle;
+import com.dnd.health.domain.profile.domain.Interest;
 import com.dnd.health.domain.profile.domain.Region;
 import com.dnd.health.domain.profile.domain.Sport;
 import lombok.AllArgsConstructor;
@@ -21,9 +23,7 @@ public class PostUpdateCommand {
 
     private Sport sport;
 
-    private List<String> exerciseStyles;
-
-    private List<String> interests;
+    private List<String> tags;
 
     private String title;
 
@@ -43,9 +43,7 @@ public class PostUpdateCommand {
                 .member(member)
                 .title(Title.from(title))
                 .content(Content.from(content))
-                .createdAt(LocalDateTime.now())
-                .exerciseStyles(exerciseStyles.stream().map(ExerciseStyle::new).collect(Collectors.toList()))
-                .interests(interests.stream().map(Interest::new).collect(Collectors.toList()))
+                .tags(tags.stream().map(PostTag::new).collect(Collectors.toList()))
                 .sport(sport)
                 .region(Region.from(region))
                 .wanted(Wanted.from(age, gender, runtime))

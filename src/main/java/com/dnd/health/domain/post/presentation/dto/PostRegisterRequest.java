@@ -12,9 +12,7 @@ public class PostRegisterRequest {
 
     private String sport;
 
-    private List<String> exerciseStyles;
-
-    private List<String> interests;
+    private List<String> tags;
 
     private String title;
 
@@ -32,8 +30,7 @@ public class PostRegisterRequest {
         return new PostRegisterCommand(
                 memberId,
                 sport,
-                exerciseStyles,
-                interests,
+                tags,
                 title,
                 content,
                 region,
