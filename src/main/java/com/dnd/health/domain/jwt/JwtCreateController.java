@@ -1,62 +1,35 @@
 package com.dnd.health.domain.jwt;
 
-import com.auth0.jwt.JWT;
-import com.auth0.jwt.algorithms.Algorithm;
-import com.dnd.health.global.security.oauth.provider.KakaoUser;
-import com.dnd.health.global.security.oauth.provider.OAuthUserInfo;
-import com.dnd.health.domain.member.domain.Member;
-import com.dnd.health.domain.member.domain.MemberRepository;
-import com.dnd.health.domain.member.domain.Role;
-import java.util.Date;
-import java.util.Map;
-import java.util.Optional;
+import static com.dnd.health.domain.member.application.MemberSignUpService.setCookieAndHeader;
+
+import com.dnd.health.domain.jwt.dto.ReIssueToken;
+import com.dnd.health.domain.jwt.service.JwtTokenReissueService;
+import com.dnd.health.global.response.MessageResponse;
+import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CookieValue;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+
+/**
+ * 리프래쉬 토큰 사용 X
+ */
 @RestController
 @RequiredArgsConstructor
 public class JwtCreateController {
 
-    private final MemberRepository memberRepository;
-    private final BCryptPasswordEncoder bCryptPasswordEncoder;
+    private final JwtTokenReissueService jwtTokenReissueService;
 
-    @PostMapping("/oauth/jwt/kakao")
-    public String jwtCreate(@RequestBody Map<String, Object> data) {
-        System.out.println("jwtCreate 실행됨");
-        System.out.println(data.get("profileObj"));
-
-        OAuthUserInfo googleUser =
-                new KakaoUser((Map<String, Object>)data.get("profileObj"));
-
-        Optional<Member> memberEntity =
-                memberRepository.findByUsername(googleUser.getProvider()+"_"+googleUser.getProviderId());
-
-        if(memberEntity.isEmpty()) {
-            Member userRequest = Member.builder()
-                    .username(googleUser.getProvider()+"_"+googleUser.getProviderId())
-                    .password(bCryptPasswordEncoder.encode("겟인데어"))
-                    .email(googleUser.getEmail())
-                    .provider(googleUser.getProvider())
-                    .providerId(googleUser.getProviderId())
-                    .role(Role.ROLE_MEMBER)
-                    .build();
-
-            memberRepository.save(userRequest);
-        }
-
-        Optional<Member> findMember = memberRepository.findByUsername(
-                googleUser.getProvider() + "_" + googleUser.getProviderId());
-
-        Member userEntity = findMember.get();
-
-        return JWT.create()
-                .withSubject(userEntity.getUsername().to())
-                .withExpiresAt(new Date(System.currentTimeMillis()+JwtProperties.ACCESS_TOKEN_EXPIRATION))
-                .withClaim("id", userEntity.getId())
-                .withClaim("username", userEntity.getUsername().to())
-                .sign(Algorithm.HMAC512(JwtProperties.SECRET));
-    }
+//    @GetMapping("/api/v1/jwt/refresh")
+//    @ApiOperation(value = "Jwt 재발급", notes = "Jwt를 재발급 할 수 있습니다.")
+//    public ResponseEntity<MessageResponse> reIssueToken(@CookieValue(name = "refreshToken") String refreshToken) {
+//        ReIssueToken reIssueTokenDto = jwtTokenReissueService.reIssueToken(refreshToken);
+//        HttpHeaders headers = setCookieAndHeader(reIssueTokenDto);
+//        return new ResponseEntity<>(
+//                MessageResponse.of(HttpStatus.CREATED, "Token 재발급 성공"), headers, HttpStatus.CREATED);
+//    }
 }

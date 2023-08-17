@@ -100,7 +100,7 @@ public class JwtTokenProvider {
                 .signWith(key, SignatureAlgorithm.HS256)
                 .setSubject(String.valueOf(id))
                 .claim("role", role.getAuthority())
-                .setIssuer("bbok")
+                .setIssuer("newple")
                 .setIssuedAt(now)
                 .setExpiration(validity)
                 .compact();
@@ -117,7 +117,7 @@ public class JwtTokenProvider {
 
         String refreshToken = Jwts.builder()
                 .signWith(key, SignatureAlgorithm.HS256)
-                .setIssuer("bbok")
+                .setIssuer("newple")
                 .setIssuedAt(now)
                 .setExpiration(validity)
                 .compact();
