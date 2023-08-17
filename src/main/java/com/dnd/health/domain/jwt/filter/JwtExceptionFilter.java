@@ -1,7 +1,7 @@
-package com.dnd.health.global.jwt.filter;
+package com.dnd.health.domain.jwt.filter;
 
+import com.dnd.health.domain.jwt.handler.exception.JwtException;
 import com.dnd.health.global.exception.ErrorResponse;
-import com.dnd.health.global.jwt.handler.exception.JwtException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 import javax.servlet.FilterChain;
@@ -13,7 +13,6 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 @Component
 public class JwtExceptionFilter extends OncePerRequestFilter {
-
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,

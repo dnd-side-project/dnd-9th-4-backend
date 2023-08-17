@@ -1,4 +1,4 @@
-package com.dnd.health.global.jwt.handler.exception;
+package com.dnd.health.domain.jwt.handler.exception;
 
 import com.dnd.health.global.exception.ErrorCode;
 

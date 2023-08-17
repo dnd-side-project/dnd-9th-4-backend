@@ -1,4 +1,4 @@
-package com.dnd.health.global.jwt.handler;
+package com.dnd.health.domain.jwt.handler;
 
 import static com.dnd.health.global.exception.ErrorCode.RESOURCE_FORBIDDEN;
 

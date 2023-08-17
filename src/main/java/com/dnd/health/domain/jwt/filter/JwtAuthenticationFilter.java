@@ -1,8 +1,8 @@
-package com.dnd.health.global.jwt.filter;
+package com.dnd.health.domain.jwt.filter;
 
 import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 
-import com.dnd.health.global.jwt.service.JwtTokenProvider;
+import com.dnd.health.domain.jwt.service.JwtTokenProvider;
 import java.io.IOException;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -25,7 +25,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
      * 1. request header 에서 Authorization 값을 가져온다.
      *
      * 1-1. Authorization 값이 없다면? 사용자가 처음 요청
-     * accessToken 발급 / 해당 유저를 저장한 후에 UUID를 발급하여 응답한다.
+     * accessToken 발급 / 해당 유저를 저장한 후에 ID를 발급하여 응답한다.
      *
      * 1-2. Authorization 값이 있다면? 유효성 검증
      * 토큰이 올바른지와 만료됐는지 검증한다.

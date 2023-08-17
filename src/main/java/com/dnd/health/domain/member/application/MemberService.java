@@ -16,7 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
 @Service
-@Transactional(readOnly = true)
+@Transactional
 @RequiredArgsConstructor
 public class MemberService {
 
@@ -34,7 +34,7 @@ public class MemberService {
                 .build();
     }
 
-    public Optional<Member> getMemberByUserNumber(String username) {
+    public Optional<Member> getMemberByUserName(String username) {
         return memberRepository.findByUsername(username);
     }
 

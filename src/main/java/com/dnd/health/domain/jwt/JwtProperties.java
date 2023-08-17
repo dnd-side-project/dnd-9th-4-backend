@@ -1,4 +1,4 @@
-package com.dnd.health.global.jwt;
+package com.dnd.health.domain.jwt;
 
 public interface JwtProperties {
     String SECRET = "MFswDQYJKoZIhvcNAQEBBQADSgAwRwJAaJd167MUifo3ZSytpDPd9z7oSS+1KXjf\n"

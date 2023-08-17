@@ -1,4 +1,4 @@
-package com.dnd.health.global.jwt.dto;
+package com.dnd.health.domain.jwt.dto;
 
 import lombok.Getter;
 
