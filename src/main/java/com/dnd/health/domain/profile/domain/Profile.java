@@ -54,12 +54,12 @@ public class Profile {
 
     @Builder.Default
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "style_id", referencedColumnName = "post_id")
+    @JoinColumn(name = "style_id", referencedColumnName = "profile_id")
     private List<ExerciseStyle> exerciseStyles = new ArrayList<>();
 
     @Builder.Default
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "interest_id", referencedColumnName = "post_id")
+    @JoinColumn(name = "interest_id", referencedColumnName = "profile_id")
     private List<Interest> interests = new ArrayList<>();
 
 }
