@@ -7,7 +7,7 @@ import org.springframework.data.repository.query.Param;
 
 public interface MemberRepository extends JpaRepository<Member, Long> {
 
-    Optional<Member> findByUsername(String username);
+    Optional<Member> findByUsername(long username);
 
     Optional<Member> findById(Long id);
 

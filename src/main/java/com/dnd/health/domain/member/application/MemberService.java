@@ -34,8 +34,8 @@ public class MemberService {
                 .build();
     }
 
-    public Optional<Member> getMemberByUserName(String username) {
-        return memberRepository.findByUsername(username);
+    public Optional<Member> getMemberByUserName(long id) {
+        return memberRepository.findByUsername(id);
     }
 
     public Member saveInfo(Member member) {
