@@ -20,7 +20,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @RequiredArgsConstructor
 public class SecurityConfig {
 
-    private final CorsConfig corsConfig;
     private final JwtAccessDeniedHandler jwtAccessDeniedHandler;
     private final JwtExceptionFilter jwtExceptionFilter;
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
@@ -34,7 +33,8 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-                .cors().disable()
+                .cors()
+                .and()
                 .csrf().disable()
                 .formLogin().disable()
                 .httpBasic().disable()

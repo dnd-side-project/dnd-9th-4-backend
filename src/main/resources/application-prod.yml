@@ -29,6 +29,10 @@ spring:
     init:
       mode: never
 
+  security:
+    user:
+      password: ignored
+
 oauth2:
   kakao:
     infoUrl: https://kapi.kakao.com
