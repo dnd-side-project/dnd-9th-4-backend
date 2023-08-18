@@ -19,6 +19,7 @@ public class CorsConfig {
 
         config.addAllowedOrigin("https://dnd-9th-4-newple-app.vercel.app");
         config.addAllowedOrigin("https://dnd-9th-4-newple-app.vercel.app/");
+        config.addAllowedOrigin("https://accounts.kakao.com/login");
 
         config.addAllowedMethod("GET");
         config.addAllowedMethod("POST");
