@@ -42,9 +42,9 @@ public class MemberService {
         return memberRepository.save(member);
     }
 
-    public Member getMemberById(long id) {
+    public Member getMemberById(String id) {
         log.info("해당 id를 가진 멤버를 찾습니다.");
-        return memberRepository.findById(id)
+        return memberRepository.findByKakaoId(id)
                 .orElseThrow(()->new MemberNotFoundException(MEMBER_NOT_FOUND));
     }
 }

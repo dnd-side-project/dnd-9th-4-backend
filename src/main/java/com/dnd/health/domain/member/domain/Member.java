@@ -76,7 +76,7 @@ public class Member {
     public Member(final String username, final String birth, final String providerId,
                   final Role role, final String password, final String email,
                   final String provider, final String gender, final String age,
-                  final OAuth2Provider oAuth2Provider) {
+                  final OAuth2Provider oAuth2Provider, final String profileUrl) {
         this.provider = Provider.from(provider);
         this.providerId = ProviderId.from(providerId);
         this.username = Username.from(username);
@@ -87,6 +87,7 @@ public class Member {
         this.age = Age.from(age);
         this.role = role;
         this.oauth2Provider = oAuth2Provider;
+        this.profileUrl = ProfileUrl.from(profileUrl);
     }
 
     public void changePassword(String newPassword) {

@@ -31,6 +31,8 @@ public class KakaoTokenRequest {
                 .build();
     }
 
+    // kakao는 Content-Type 을 application/x-www-form-urlencoded 로 받는다.
+    // FeignClient는 기본이 JSON으로 변경하니 아래처럼 데이터를 변환 후 보내야 한다.
     @Override
     public String toString() {
         return

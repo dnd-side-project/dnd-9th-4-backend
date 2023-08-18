@@ -20,9 +20,9 @@ public class KakaoFeignConfig {
         return template -> template.header("Content-Type", "application/x-www-form-urlencoded");
     }
 
-//  @Bean
-//  public ErrorDecoder errorDecoder() {
-//    return new FeignClientExceptionErrorDecoder();
-//  }
+//    @Bean
+//    public ErrorDecoder errorDecoder() {
+//        return new FeignClientExceptionErrorDecoder();
+//    }
 
 }
