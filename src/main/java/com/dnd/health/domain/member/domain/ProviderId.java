@@ -19,4 +19,8 @@ public class ProviderId {
     public static ProviderId from(final String providerId) {
         return new ProviderId(providerId);
     }
+
+    public String to(){
+        return this.value;
+    }
 }
