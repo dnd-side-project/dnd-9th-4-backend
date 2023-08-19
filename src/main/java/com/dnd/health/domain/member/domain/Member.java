@@ -29,7 +29,7 @@ public class Member {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "member_id")
-    private long id;
+    private Long id;
 
     @Embedded
     private Provider provider;
@@ -101,5 +101,15 @@ public class Member {
     public void updateInfo(String profileUrl, String username) {
         this.profileUrl = ProfileUrl.from(profileUrl);
         this.username = Username.from(username);
+    }
+
+    public void updateInfo(String profileUrl, String username, String gender) {
+        this.profileUrl = ProfileUrl.from(profileUrl);
+        this.username = Username.from(username);
+        this.gender = Gender.from(gender);
+    }
+
+    public void updateProfile(Profile profile) {
+        this.profile = profile;
     }
 }
