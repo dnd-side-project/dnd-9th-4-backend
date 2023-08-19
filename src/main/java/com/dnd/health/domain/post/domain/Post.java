@@ -63,6 +63,9 @@ public class Post {
     @JoinColumn(name = "post_id", referencedColumnName = "post_id")
     private List<PostTag> tags = new ArrayList<>();
 
+    @Column(name = "matched_member_id")
+    private Long matchedMemberId;
+
     @PrePersist
     public void onPrePersist() {
         String customLocalDateTimeFormat = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyy-MM-dd HH:mm:ss"));

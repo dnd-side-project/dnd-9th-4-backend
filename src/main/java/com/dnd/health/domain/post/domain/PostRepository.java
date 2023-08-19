@@ -21,4 +21,12 @@ public interface PostRepository extends JpaRepository<Post, Long> {
     int setPostStatusCompleted(@PathParam("status") String status, Long postId);
 
     List<Post> findAllByWantedRuntimeAfter(LocalDateTime now);
+
+    List<Post> findAllByMemberId(Long memberId);
+
+    @Transactional
+    @Modifying
+    @Query( value = "update Post p set p.matched_member_id = :applicantId where p.post_id = :postId",
+            nativeQuery = true)
+    void setMatchedMemberId(Long applicantId, Long postId);
 }

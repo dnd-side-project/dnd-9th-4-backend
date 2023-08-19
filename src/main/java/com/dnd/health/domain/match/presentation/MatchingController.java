@@ -52,4 +52,9 @@ public class MatchingController {
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 
+    @GetMapping
+    public ResponseEntity<MatchScheduleResponse> getMatches(@RequestBody MatchQueryRequest matchRequest) {
+        MatchScheduleResponse matchs = matchingService.getMatches(matchRequest.getMemberId());
+        return ResponseEntity.ok(matchs);
+    }
 }
