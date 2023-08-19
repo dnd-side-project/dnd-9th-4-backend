@@ -10,6 +10,8 @@ import java.util.List;
 @NoArgsConstructor
 public class PostRegisterRequest {
 
+    private Long memberId;
+
     private String sport;
 
     private List<String> tags;
@@ -26,7 +28,7 @@ public class PostRegisterRequest {
 
     private String runtime;
 
-    public PostRegisterCommand toCommand(Long memberId) {
+    public PostRegisterCommand toCommand() {
         return new PostRegisterCommand(
                 memberId,
                 sport,

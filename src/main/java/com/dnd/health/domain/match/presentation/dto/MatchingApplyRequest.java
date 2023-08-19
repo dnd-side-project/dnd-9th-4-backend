@@ -10,7 +10,9 @@ public class MatchingApplyRequest {
 
     private Long postId;
 
-    public MatchingApplyCommand toCommand(Long memberId){
+    private Long memberId;
+
+    public MatchingApplyCommand toCommand(){
         return new MatchingApplyCommand(postId, memberId);
     }
 }
