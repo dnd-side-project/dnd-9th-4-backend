@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -63,7 +64,7 @@ public class PostResponse {
         this.content = post.getContent().to();
         this.age = post.getWanted().getAge();
         this.gender = post.getWanted().getGender();
-        this.runtime = post.getWanted().getRuntime();
+        this.runtime = post.getWanted().getRuntime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
         this.status = post.getStatus();
     }
 }

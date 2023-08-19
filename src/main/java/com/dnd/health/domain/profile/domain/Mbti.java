@@ -18,4 +18,8 @@ public class Mbti {
     public static Mbti from(final String mbti) {
         return new Mbti(mbti);
     }
+
+    public String to() {
+        return value;
+    }
 }
