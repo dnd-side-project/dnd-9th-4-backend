@@ -51,6 +51,7 @@ public class Profile {
     @Embedded
     private PeriodEx periodEx;
 
+    @Column(name = "profile_img")
     private String profileImg;
 
     @Builder.Default
