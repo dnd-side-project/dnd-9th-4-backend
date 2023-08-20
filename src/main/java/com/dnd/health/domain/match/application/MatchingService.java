@@ -19,12 +19,15 @@ import com.dnd.health.domain.post.domain.PostStatus;
 import com.dnd.health.domain.post.exception.PostNotFoundException;
 import com.dnd.health.global.exception.ErrorCode;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cglib.core.Local;
+import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
+import java.text.SimpleDateFormat;
+import java.time.*;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -111,5 +114,47 @@ public class MatchingService {
             }
         });
         return new MatchScheduleResponse(reserved, completed);
+    }
+
+    public List<ScheduleResponse> getThisWeekMatches(Long memberId) {
+        List<ScheduleResponse> reserved = new ArrayList<>();
+        Calendar cal = Calendar.getInstance(Locale.KOREA);
+        Date date = Date.from(LocalDateTime.now().toInstant(ZoneOffset.of("+09:00")));
+        cal.setTime(date);
+        cal.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
+        LocalDateTime startDate = Instant.ofEpochMilli(cal.getTime().getTime())
+                .atZone(ZoneId.systemDefault())
+                .toLocalDateTime();
+        cal.set(Calendar.DAY_OF_WEEK, Calendar.SATURDAY);
+        LocalDateTime endDate = Instant.ofEpochMilli(cal.getTime().getTime())
+                .atZone(ZoneId.systemDefault())
+                .toLocalDateTime();
+
+        // 신청한 매칭
+        List<Match> applyList = matchingRepository.findByMemberId(memberId);
+        applyList.stream().forEach((match)-> {
+            if(match.getMatchStatus() == MatchStatus.MATCHED){
+                LocalDateTime runtime = match.getPost().getWanted().getRuntime();
+                if(startDate.compareTo(runtime) <= 0 && endDate.compareTo(runtime) >= 0) {
+                    reserved.add(new ScheduleResponse(match, false));
+                }
+            }
+        });
+
+        // 작성한 매칭
+        List<Post> writtenList = postRepository.findAllByMemberId(memberId);
+        writtenList.stream().forEach((post)-> {
+            if(post.getStatus() == PostStatus.COMPLETED) {
+                LocalDateTime runtime = post.getWanted().getRuntime();
+                if(startDate.compareTo(runtime) <= 0 && endDate.compareTo(runtime) >= 0) {
+                    Match match = matchingRepository.findByPostIdAndMemberId(post.getId(), post.getMatchedMemberId())
+                            .orElseThrow(() -> new MatchNotFoundException(ErrorCode.MATCH_STATUS_NOT_FOUND));
+
+                    reserved.add(new ScheduleResponse(match, true));
+                }
+            }
+        });
+
+        return reserved;
     }
 }
