@@ -60,6 +60,7 @@ public class MemberController {
     @ApiOperation(
             value = "인가 코드 발급",
             notes = "해당 url을 통해 로그인 화면으로 넘어간 후, 사용자가 정보를 입력하면 redirect url에서 코드를 발급할 수 있습니다.")
+    @CrossOrigin(origins = "https://dnd-9th-4-newple-app.vercel.app")
     @GetMapping("/api/v1/kakao/login")
     public ResponseEntity<HttpHeaders> getKakaoAuthCode() {
         HttpHeaders httpHeaders = kakaoFeignService.kakaoLogin();

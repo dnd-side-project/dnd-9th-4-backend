@@ -89,7 +89,7 @@ public class JwtTokenProvider {
     }
 
     /**
-     * 게스트로 진입할때, 해당 유저를 DB에 저장하고 난 후의 UUID로 accessToken을 생성한다.
+     * 게스트로 진입할때, 해당 유저를 DB에 저장하고 난 후의 ID로 accessToken을 생성한다.
      * 유효시간은 1시간으로 설정해놓았다.
      */
     public String createAccessToken(long id, Role role) {
