@@ -18,4 +18,8 @@ public class PeriodEx {
     public static PeriodEx from(final String periodEx) {
         return new PeriodEx(periodEx);
     }
+
+    public String to() {
+        return this.value;
+    }
 }

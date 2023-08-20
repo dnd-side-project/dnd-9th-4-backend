@@ -26,7 +26,10 @@ public enum ErrorCode {
 
     // Match
     MATCH_NOT_FOUND(HttpStatus.NOT_FOUND, "ERR_MATCH_NOT_FOUND","해당 매칭을 찾을 수 없습니다."),
-    MATCH_STATUS_NOT_FOUND(HttpStatus.NOT_FOUND, "ERR_MATCH_STATUS_NOT_FOUND", "매칭 상태를 찾을 수 없습니다.");
+    MATCH_STATUS_NOT_FOUND(HttpStatus.NOT_FOUND, "ERR_MATCH_STATUS_NOT_FOUND", "매칭 상태를 찾을 수 없습니다."),
+
+    // Profile
+    PROFILE_NOT_FOUND(HttpStatus.NOT_FOUND, "ERR_PROFILE_NOT_FOUND","해당 사용자의 프로필을 찾을 수 없습니다.");
 
     private final HttpStatus status;
     private final String code;

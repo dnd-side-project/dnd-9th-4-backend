@@ -1,10 +1,7 @@
 package com.dnd.health.domain.post.presentation;
 
 import com.dnd.health.domain.post.application.PostService;
-import com.dnd.health.domain.post.presentation.dto.PostUpdateRequest;
-import com.dnd.health.domain.post.presentation.dto.PostRegisterRequest;
-import com.dnd.health.domain.post.presentation.dto.PostRegisterResponse;
-import com.dnd.health.domain.post.presentation.dto.PostResponse;
+import com.dnd.health.domain.post.presentation.dto.*;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -22,8 +19,7 @@ public class PostController {
 
     @PostMapping
     public ResponseEntity<PostRegisterResponse> register(@RequestBody PostRegisterRequest postRequest) {
-        long memberId = 1L;
-        PostRegisterResponse postResponse = postService.save(postRequest.toCommand(memberId));
+        PostRegisterResponse postResponse = postService.save(postRequest.toCommand());
         return ResponseEntity.status(HttpStatus.CREATED).body(postResponse);
     }
 
@@ -34,9 +30,8 @@ public class PostController {
     }
 
     @GetMapping("/simple")
-    public ResponseEntity<List<PostResponse>> getSomePost() {
-        Long memberId = 1L;
-        List<PostResponse> postResponses = postService.findSomePost(memberId);
+    public ResponseEntity<List<PostResponse>> getSomePost(@RequestBody PostQueryRequest postRequest) {
+        List<PostResponse> postResponses = postService.findSomePost(postRequest.getMemberId());
         return ResponseEntity.ok(postResponses);
     }
 

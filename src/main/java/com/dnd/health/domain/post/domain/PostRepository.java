@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.websocket.server.PathParam;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public interface PostRepository extends JpaRepository<Post, Long> {
@@ -18,4 +19,14 @@ public interface PostRepository extends JpaRepository<Post, Long> {
     @Query( value = "update Post p set p.status = :status where p.post_id = :postId",
             nativeQuery = true)
     int setPostStatusCompleted(@PathParam("status") String status, Long postId);
+
+    List<Post> findAllByWantedRuntimeAfter(LocalDateTime now);
+
+    List<Post> findAllByMemberId(Long memberId);
+
+    @Transactional
+    @Modifying
+    @Query( value = "update Post p set p.matched_member_id = :applicantId where p.post_id = :postId",
+            nativeQuery = true)
+    void setMatchedMemberId(Long applicantId, Long postId);
 }

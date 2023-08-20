@@ -1,10 +1,7 @@
 package com.dnd.health.domain.match.presentation;
 
 import com.dnd.health.domain.match.application.MatchingService;
-import com.dnd.health.domain.match.presentation.dto.MatchApplicantResponse;
-import com.dnd.health.domain.match.presentation.dto.MatchResponse;
-import com.dnd.health.domain.match.presentation.dto.MatchingApplyRequest;
-import com.dnd.health.domain.match.presentation.dto.MatchingRefuseRequest;
+import com.dnd.health.domain.match.presentation.dto.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,8 +18,7 @@ public class MatchingController {
 
     @PostMapping("/apply")
     public ResponseEntity<Void> apply(@RequestBody MatchingApplyRequest matchingRequest){
-        Long memberId = 2L;
-        matchingService.apply(matchingRequest.toCommand(memberId));
+        matchingService.apply(matchingRequest.toCommand());
         return ResponseEntity.status(HttpStatus.ACCEPTED).build();
     }
 
@@ -45,17 +41,20 @@ public class MatchingController {
     }
 
     @GetMapping("/{postId}")
-    public ResponseEntity<MatchResponse> getMatchStatus(@PathVariable Long postId) {
-        Long memberId = 2L;
-        MatchResponse match = matchingService.getMatch(postId, memberId);
+    public ResponseEntity<MatchResponse> getMatchStatus(@PathVariable Long postId, @RequestBody MatchQueryRequest matchRequest) {
+        MatchResponse match = matchingService.getMatch(postId, matchRequest.getMemberId());
         return ResponseEntity.ok(match);
     }
 
-    @DeleteMapping("/{postId}")
-    public ResponseEntity<Void> cancelMatch(@PathVariable Long postId) {
-        Long memberId = 2L;
-        matchingService.delete(postId, memberId);
+    @PutMapping("/{postId}")
+    public ResponseEntity<Void> cancelMatch(@PathVariable Long postId, @RequestBody MatchQueryRequest matchRequest) {
+        matchingService.delete(postId, matchRequest.getMemberId());
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 
+    @GetMapping
+    public ResponseEntity<MatchScheduleResponse> getMatches(@RequestBody MatchQueryRequest matchRequest) {
+        MatchScheduleResponse matchs = matchingService.getMatches(matchRequest.getMemberId());
+        return ResponseEntity.ok(matchs);
+    }
 }

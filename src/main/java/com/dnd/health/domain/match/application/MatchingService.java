@@ -6,6 +6,8 @@ import com.dnd.health.domain.match.domain.MatchStatus;
 import com.dnd.health.domain.match.exception.MatchNotFoundException;
 import com.dnd.health.domain.match.presentation.dto.MatchApplicantResponse;
 import com.dnd.health.domain.match.presentation.dto.MatchResponse;
+import com.dnd.health.domain.match.presentation.dto.MatchScheduleResponse;
+import com.dnd.health.domain.match.presentation.dto.ScheduleResponse;
 import com.dnd.health.domain.member.domain.Member;
 import com.dnd.health.domain.member.domain.MemberRepository;
 import com.dnd.health.domain.member.exception.MemberNotFoundException;
@@ -20,6 +22,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -62,9 +66,11 @@ public class MatchingService {
         matchingRepository.setMatchStatus(command.getPostId(), command.getApplicantId(), MatchStatus.REJECTED.name());
     }
 
+    @Transactional
     public void confirmMatch(MatchingRefuseCommand command) {
         matchingRepository.setMatchStatus(command.getPostId(), command.getApplicantId(), MatchStatus.MATCHED.name());
         postRepository.setPostStatusCompleted(PostStatus.COMPLETED.name(), command.getPostId());
+        postRepository.setMatchedMemberId(command.getApplicantId(), command.getPostId());
     }
 
     public List<MatchApplicantResponse> getAllApplicant(Long postId) {
@@ -74,4 +80,36 @@ public class MatchingService {
                 .collect(Collectors.toList());
     }
 
+    public MatchScheduleResponse getMatches(Long memberId) {
+        List<ScheduleResponse> reserved = new ArrayList<>();
+        List<ScheduleResponse> completed = new ArrayList<>();
+
+        LocalDateTime today = LocalDateTime.now();
+        // 신청한 매칭
+        List<Match> applyList = matchingRepository.findByMemberId(memberId);
+        applyList.stream().forEach((match)-> {
+            if(match.getMatchStatus() == MatchStatus.MATCHED){
+                if(match.getPost().getWanted().getRuntime().compareTo(today) >= 0) {
+                    reserved.add(new ScheduleResponse(match, false));
+                } else {
+                    completed.add(new ScheduleResponse(match, false));
+                }
+            }
+        });
+
+        // 작성한 매칭
+        List<Post> writtenList = postRepository.findAllByMemberId(memberId);
+        writtenList.stream().forEach((post)-> {
+            if(post.getStatus() == PostStatus.COMPLETED) {
+                Match match = matchingRepository.findByPostIdAndMemberId(post.getId(), post.getMatchedMemberId())
+                        .orElseThrow(() -> new MatchNotFoundException(ErrorCode.MATCH_STATUS_NOT_FOUND));
+                if(match.getPost().getWanted().getRuntime().compareTo(today) >= 0) {
+                    reserved.add(new ScheduleResponse(match, true));
+                } else {
+                    completed.add(new ScheduleResponse(match, true));
+                }
+            }
+        });
+        return new MatchScheduleResponse(reserved, completed);
+    }
 }
