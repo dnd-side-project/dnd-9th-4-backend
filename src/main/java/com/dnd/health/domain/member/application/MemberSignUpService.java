@@ -31,6 +31,7 @@ public class MemberSignUpService {
     public LoginResponse loginKakaoMember(KakaoUserInfoResponse kakaoUserInfo) {
         //카카오 회원 Id를 변조해서 검사해본다.(회원 Id로 해야만 고유성을 가질 수 있기 때문에)
         String kakaoId = kakaoUserInfo.getId();
+        log.info("kakaoId : {}", kakaoId);
         Optional<Member> loginMember = Optional.ofNullable(memberService.getMemberById(kakaoId));
 
         //만약 존재한다면, update 친다.
@@ -59,12 +60,13 @@ public class MemberSignUpService {
     }
 
     private Member signUp(KakaoUserInfoResponse kakaoUserInfo) {
+//        log.info("register member = {}", kakaoUserInfo);
         Member member = kakaoUserInfo.toEntity();
         return memberService.saveInfo(member);
     }
 
     private void updateMemberInfo(KakaoUserInfoResponse kakaoUserInfo, Member member) {
-        member.updateInfo(kakaoUserInfo.getProfileImg(), kakaoUserInfo.getUsername());
+        member.updateInfo(kakaoUserInfo.getKakao_account().getProfile().getProfile_image_url(), kakaoUserInfo.getKakao_account().getProfile().getNickname());
     }
 
     public static HttpHeaders setCookieAndHeader(LoginResponse loginResult) {

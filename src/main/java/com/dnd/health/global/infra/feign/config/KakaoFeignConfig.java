@@ -17,7 +17,7 @@ public class KakaoFeignConfig {
 
     @Bean
     public RequestInterceptor requestInterceptor() {
-        return template -> template.header("Content-Type", "application/x-www-form-urlencoded=utf-8");
+        return template -> template.header("Content-Type", "application/x-www-form-urlencoded");
     }
 
 //    @Bean

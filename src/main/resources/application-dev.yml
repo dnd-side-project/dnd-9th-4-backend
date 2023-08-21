@@ -25,12 +25,12 @@ spring:
 
   sql:
     init:
-      mode: always
+      mode: never
 
 oauth2:
   kakao:
     infoUrl: https://kapi.kakao.com
     baseUrl: https://kauth.kakao.com
     clientId: 0239e3b799683b851fa867e85be71696
-    redirectUri: http://localhost:8080/api/login/oauth2/kakao/result
+    redirectUri: http://localhost:3000/auth
     secretKey: ribRjVO6H6cyZ1lztGKxpARTOHfxPGG0

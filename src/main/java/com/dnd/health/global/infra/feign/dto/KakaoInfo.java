@@ -28,6 +28,7 @@ public class KakaoInfo {
         Map<String, Object> params = new HashMap<>();
         params.put("redirect_uri", getRedirectUri());
         params.put("client_id", getClientId());
+        params.put("client_secret", getSecretKey());
         params.put("response_type", "code");
 
         String paramStr = params.entrySet().stream()

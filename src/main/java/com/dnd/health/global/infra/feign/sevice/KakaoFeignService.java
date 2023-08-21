@@ -6,6 +6,8 @@ import com.dnd.health.global.infra.feign.dto.KakaoInfo;
 import com.dnd.health.global.infra.feign.dto.request.KakaoTokenRequest;
 import com.dnd.health.global.infra.feign.dto.response.KakaoTokenResponse;
 import com.dnd.health.global.infra.feign.dto.response.KakaoUserInfoResponse;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import java.net.URI;
 import java.net.URISyntaxException;
 import lombok.RequiredArgsConstructor;
@@ -54,7 +56,24 @@ public class KakaoFeignService {
      * 카카오 액세스 토큰으로 유저 정보를 요청합니다.
      */
     private KakaoUserInfoResponse getKakaoInfo(String kakaoToken) {
+        if (kakaoToken == null) {
+            throw new IllegalArgumentException("Kakao Access Token cannot be null");
+        }
+        KakaoUserInfoResponse responseEntity = kakaoInfoClient.getUserInfo(kakaoToken);
+
+        getJsonResponse(responseEntity);
+
         return kakaoInfoClient.getUserInfo(kakaoToken);
+    }
+
+    private void getJsonResponse(KakaoUserInfoResponse response) {
+        ObjectMapper objectMapper = new ObjectMapper();
+        try {
+            String jsonResponse = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(response);
+            log.info("Received JSON response:\n" + jsonResponse);
+        } catch (JsonProcessingException e) {
+            log.info("Error converting response to JSON: " + e.getMessage());
+        }
     }
 
     /**
@@ -65,6 +84,7 @@ public class KakaoFeignService {
     private String getKakaoToken(String code) {
         KakaoTokenResponse token = kakaoTokenClient.getToken(
                 KakaoTokenRequest.newInstance(kakaoInfo, code).toString());
+        log.info("{}", token.getAccessToken());
         return token.getAccessToken();
     }
 }

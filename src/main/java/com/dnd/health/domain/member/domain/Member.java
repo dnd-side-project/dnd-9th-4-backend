@@ -32,9 +32,6 @@ public class Member {
     private Long id;
 
     @Embedded
-    private Provider provider;
-
-    @Embedded
     private ProviderId providerId;
 
     @Enumerated(EnumType.STRING)
@@ -75,9 +72,8 @@ public class Member {
     @Builder
     public Member(final String username, final String birth, final String providerId,
                   final Role role, final String password, final String email,
-                  final String provider, final String gender, final String age,
+                  final String gender, final String age,
                   final OAuth2Provider oAuth2Provider, final String profileUrl) {
-        this.provider = Provider.from(provider);
         this.providerId = ProviderId.from(providerId);
         this.username = Username.from(username);
         this.password = Password.from(password);
