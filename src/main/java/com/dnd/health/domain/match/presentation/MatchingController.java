@@ -54,7 +54,13 @@ public class MatchingController {
 
     @GetMapping
     public ResponseEntity<MatchScheduleResponse> getMatches(@RequestBody MatchQueryRequest matchRequest) {
-        MatchScheduleResponse matchs = matchingService.getMatches(matchRequest.getMemberId());
-        return ResponseEntity.ok(matchs);
+        MatchScheduleResponse matches = matchingService.getMatches(matchRequest.getMemberId());
+        return ResponseEntity.ok(matches);
+    }
+
+    @GetMapping("/week")
+    public ResponseEntity<List<ScheduleResponse>> getThisWeekMatches(@RequestBody MatchQueryRequest matchRequest) {
+        List<ScheduleResponse> matches = matchingService.getThisWeekMatches(matchRequest.getMemberId());
+        return ResponseEntity.ok(matches);
     }
 }
