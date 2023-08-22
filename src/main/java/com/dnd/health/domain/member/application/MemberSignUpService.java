@@ -35,7 +35,7 @@ public class MemberSignUpService {
         Optional<Member> loginMember = Optional.ofNullable(memberService.getMemberById(kakaoId));
 
         //만약 존재한다면, update 친다.
-        if(loginMember.isPresent()) {
+        if (loginMember.isPresent()) {
             Member member = loginMember.get();
             updateMemberInfo(kakaoUserInfo, member);
             //토큰 새로 생성이 아닌, 이후에 refreshToken 체크해서 accessToken을 다시 발급해주는 로직을 넣어야 함.
@@ -51,7 +51,7 @@ public class MemberSignUpService {
      * member 정보를 가지고 accessToken 과 refreshToken 을 생성한다.
      */
     private LoginResponse createSignUpResult(Member member) {
-        String accessToken = jwtTokenProvider.createAccessToken(member.getId(), member.getRole());
+        String accessToken = jwtTokenProvider.createAccessToken(member.getProviderId().to(), member.getRole());
         String refreshToken = jwtTokenProvider.createRefreshToken(member.getId());
 
         // refreshToken은 redis에 따로 저장해둔다.
@@ -65,7 +65,8 @@ public class MemberSignUpService {
     }
 
     private void updateMemberInfo(KakaoUserInfoResponse kakaoUserInfo, Member member) {
-        member.updateInfo(kakaoUserInfo.getKakao_account().getProfile().getProfile_image_url(), kakaoUserInfo.getKakao_account().getProfile().getNickname());
+        member.updateInfo(kakaoUserInfo.getKakao_account().getProfile().getProfile_image_url(),
+                kakaoUserInfo.getKakao_account().getProfile().getNickname());
     }
 
     public static HttpHeaders setCookieAndHeader(LoginResponse loginResult) {

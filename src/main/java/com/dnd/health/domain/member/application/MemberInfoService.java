@@ -11,8 +11,8 @@ public class MemberInfoService {
 
     private final MemberService memberService;
 
-    public MemberInfoResponse getMember(String KakaoId) {
-        Member member = memberService.getMemberById(KakaoId);
+    public MemberInfoResponse getMember(String id) {
+        Member member = memberService.getMemberById(id);
         return new MemberInfoResponse(member);
     }
 }

@@ -83,10 +83,14 @@ public class MemberController {
         LoginResponse kakaoLoginResponse = memberSignUpService.loginKakaoMember(kakaoUserInfo);
         HttpHeaders headers = setCookieAndHeader(kakaoLoginResponse);
 
-        return new ResponseEntity<>(
-                DataResponse.of(
-                        HttpStatus.CREATED, "카카오 계정으로 회원가입 성공", kakaoLoginResponse.getMember()), headers,
-                HttpStatus.CREATED);
+        ResponseEntity<DataResponse<MemberSimpleInfoResponse>> responseEntity =
+                new ResponseEntity<>(
+                        DataResponse.of(
+                                HttpStatus.CREATED, "카카오 계정으로 회원가입 성공", kakaoLoginResponse.getMember()), headers,
+                        HttpStatus.CREATED);
+        log.info("response entity : {}", responseEntity);
+
+        return responseEntity;
     }
 
     /**
@@ -100,6 +104,7 @@ public class MemberController {
     public ResponseEntity<DataResponse<MemberInfoResponse>> getMember(
             @AuthenticationPrincipal SessionUser sessionUser) {
         MemberInfoResponse memberInfo = memberInfoService.getMember(sessionUser.getId());
+
         return new ResponseEntity<>(
                 DataResponse.of(HttpStatus.OK, "멤버 정보 조회 성공", memberInfo), HttpStatus.OK);
     }

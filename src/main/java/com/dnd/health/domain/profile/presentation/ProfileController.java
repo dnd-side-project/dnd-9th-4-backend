@@ -1,5 +1,6 @@
 package com.dnd.health.domain.profile.presentation;
 
+import com.dnd.health.domain.jwt.service.JwtTokenProvider;
 import com.dnd.health.domain.profile.application.ProfileService;
 import com.dnd.health.domain.profile.presentation.dto.*;
 import lombok.RequiredArgsConstructor;
@@ -16,6 +17,7 @@ import java.util.List;
 public class ProfileController {
 
     private final ProfileService profileService;
+    private final JwtTokenProvider jwtTokenProvider;
 
     @PostMapping
     public ResponseEntity<Void> register(@RequestBody ProfileRegisterRequest profileRequest) {

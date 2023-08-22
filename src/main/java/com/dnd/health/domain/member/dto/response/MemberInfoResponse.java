@@ -8,7 +8,7 @@ import lombok.Getter;
 @Getter
 public class MemberInfoResponse {
 
-    @ApiModelProperty("member의 고유 Id")
+    @ApiModelProperty("member의 고유 kakao id")
     private final long memberId;
 
     @ApiModelProperty("member의 이름")
@@ -23,5 +23,4 @@ public class MemberInfoResponse {
                 member.getUsername().to();
         this.oauth2Provider = member.getOauth2Provider();
     }
-
 }
