@@ -8,8 +8,6 @@ import java.util.List;
 @Getter
 public class ProfileUpdateRequest {
 
-    private Long memberId;
-
     private String username;
 
     private String introduce;
@@ -38,7 +36,7 @@ public class ProfileUpdateRequest {
 
     private List<String> interests;
 
-    public ProfileUpdateCommand toCommand() {
+    public ProfileUpdateCommand toCommand(Long memberId) {
         return new ProfileUpdateCommand(
                 memberId,
                 username,

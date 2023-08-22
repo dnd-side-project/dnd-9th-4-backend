@@ -10,8 +10,6 @@ import java.util.List;
 @Getter
 public class ProfileRegisterRequest {
 
-    private Long memberId;
-
     private String username;
 
     private String profileImg;
@@ -38,7 +36,7 @@ public class ProfileRegisterRequest {
 
     private List<String> interests;
 
-    public ProfileRegisterCommand toCommand() {
+    public ProfileRegisterCommand toCommand(Long memberId) {
         return new ProfileRegisterCommand(
                 memberId,
                 username,
