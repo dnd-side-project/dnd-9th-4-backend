@@ -60,7 +60,6 @@ public class MemberSignUpService {
     }
 
     private Member signUp(KakaoUserInfoResponse kakaoUserInfo) {
-//        log.info("register member = {}", kakaoUserInfo);
         Member member = kakaoUserInfo.toEntity();
         return memberService.saveInfo(member);
     }
