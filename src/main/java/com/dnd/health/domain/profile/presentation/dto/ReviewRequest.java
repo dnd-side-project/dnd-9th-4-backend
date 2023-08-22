@@ -8,15 +8,13 @@ import java.util.List;
 @Getter
 public class ReviewRequest {
 
-    private Long raterId;
-
     private Long targetId;
 
     private int score;
 
     private List<String> reviews;
 
-    public ReviewCommand toCommand() {
+    public ReviewCommand toCommand(Long raterId) {
         return new ReviewCommand(raterId, targetId, score, reviews);
     }
 }
