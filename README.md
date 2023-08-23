@@ -25,8 +25,8 @@
             </a>
         </td>
         <td align="center">
-            <a href="https://github.com/{}">
-                <img src="https://avatars.githubusercontent.com/u/{}?v=4" style="width:150px;border-radius:50%;"><br><b>박미래</b>
+            <a href="https://github.com/miraekwak">
+                <img src="https://avatars.githubusercontent.com/u/62375220?v=4" style="width:150px;border-radius:50%;"><br><b>박미래</b>
             </a>
         </td>
     </tr>
@@ -34,7 +34,7 @@
 
 </div>
 
-- **공통** : Database 설계
+- **공통** : Database 설계 <br>
 - **전창준**
   - AWS EC2 인스턴스 및 S3, Domain 구축
   - Backend/Frontend CICD github action 구축
