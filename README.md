@@ -65,4 +65,5 @@
 
 ## 📋 아키텍쳐
 
-![image](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/2cf219d0-a25c-4cd2-8b85-2447db3f8a7d/Untitled.png)
+![script](https://github.com/dnd-side-project/dnd-9th-4-backend/assets/86146128/f7eb8c42-3c8e-4f49-999e-ee71aeffe9ca)
+
