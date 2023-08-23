@@ -32,8 +32,9 @@ public class ProfileController {
     }
 
     @GetMapping("/memberId")
-    public ResponseEntity<ProfileResponse> getProfile(@AuthenticationPrincipal SessionUser sessionUser, @PathVariable Long memberId) {
-        ProfileResponse profileResponse = profileService.getProfile(memberId);
+    public ResponseEntity<ProfileResponse> getProfile(@AuthenticationPrincipal SessionUser sessionUser) {
+        MemberInfoResponse memberInfo = memberInfoService.getMember(sessionUser.getId());
+        ProfileResponse profileResponse = profileService.getProfile(memberInfo.getMemberId());
         return ResponseEntity.ok(profileResponse);
     }
 

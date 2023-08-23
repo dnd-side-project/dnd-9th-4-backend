@@ -10,6 +10,8 @@ import com.dnd.health.domain.post.domain.PostRepository;
 import com.dnd.health.domain.post.exception.PostNotFoundException;
 import com.dnd.health.domain.post.presentation.dto.PostRegisterResponse;
 import com.dnd.health.domain.post.presentation.dto.PostResponse;
+import com.dnd.health.domain.post.presentation.dto.WrittenPostResponse;
+import com.dnd.health.domain.profile.presentation.dto.RecruitedPostResponse;
 import com.dnd.health.global.exception.ErrorCode;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -69,5 +71,10 @@ public class PostService {
         return posts.stream()
                 .map(PostResponse::new)
                 .collect(Collectors.toList());
+    }
+
+    public List<WrittenPostResponse> findMyPosts(long memberId) {
+        List<Post> posts = postRepository.findAllByMemberId(memberId);
+        return posts.stream().map(WrittenPostResponse::new).collect(Collectors.toList());
     }
 }
