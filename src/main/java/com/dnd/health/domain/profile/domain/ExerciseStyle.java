@@ -9,6 +9,8 @@ import javax.persistence.*;
 
 @Entity
 @Getter
+@Embeddable
+@Table(name = "exercise_style")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class ExerciseStyle {
 

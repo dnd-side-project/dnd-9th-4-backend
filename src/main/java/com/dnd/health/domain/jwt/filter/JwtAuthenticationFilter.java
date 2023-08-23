@@ -37,6 +37,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         //사용자의 요청 헤더에서 Authorization 값을 가져온다.
         String header = request.getHeader(AUTHORIZATION);
 
+        log.info("request info = {}", request);
+
         if(validateHeader(header)) {
             // 헤더에서 JWT를 받아온다.
             String accessToken = header.substring(7);
