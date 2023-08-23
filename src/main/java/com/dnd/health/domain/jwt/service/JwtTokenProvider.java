@@ -69,8 +69,9 @@ public class JwtTokenProvider {
         Claims claims = extractAllClaims(accessToken); //claims 정보를 추출할때 유효성 체크를 시작한다.
         String role = claims.get("role").toString();
         String id = claims.getSubject();
-        return new UsernamePasswordAuthenticationToken(getSessionUser(id), "",
-                getGrantedAuthorities(role));
+
+        log.info("현재 claims id : {}", id);
+        return new UsernamePasswordAuthenticationToken(getSessionUser(id), "", getGrantedAuthorities(role));
     }
 
     private SessionUser getSessionUser(String id) {

@@ -6,6 +6,7 @@ import com.dnd.health.domain.member.dto.response.MemberInfoResponse;
 import com.dnd.health.domain.post.application.PostService;
 import com.dnd.health.domain.post.presentation.dto.*;
 
+import com.dnd.health.domain.profile.presentation.dto.RecruitedPostResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -36,9 +37,16 @@ public class PostController {
     }
 
     @GetMapping("/simple")
-    public ResponseEntity<List<PostResponse>> getSomePost(@AuthenticationPrincipal SessionUser sessionUser, @RequestBody PostQueryRequest postRequest) {
+    public ResponseEntity<List<PostResponse>> getSomePost(@AuthenticationPrincipal SessionUser sessionUser) {
         MemberInfoResponse memberInfo = memberInfoService.getMember(sessionUser.getId());
         List<PostResponse> postResponses = postService.findSomePost(memberInfo.getMemberId());
+        return ResponseEntity.ok(postResponses);
+    }
+
+    @GetMapping("/my")
+    public ResponseEntity<List<WrittenPostResponse>> getMyPosts(@AuthenticationPrincipal SessionUser sessionUser) {
+        MemberInfoResponse memberInfo = memberInfoService.getMember(sessionUser.getId());
+        List<WrittenPostResponse> postResponses = postService.findMyPosts(memberInfo.getMemberId());
         return ResponseEntity.ok(postResponses);
     }
 

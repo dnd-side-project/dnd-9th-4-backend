@@ -13,4 +13,6 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
 
     @Query("SELECT m FROM Member m WHERE m.providerId.value = :id")
     Optional<Member> findByKakaoId(@Param("id") String providerId);
+
+    Optional<Member> findByProviderId(long id);
 }
