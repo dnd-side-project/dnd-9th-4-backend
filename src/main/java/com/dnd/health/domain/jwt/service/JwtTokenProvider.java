@@ -4,6 +4,7 @@ import com.dnd.health.domain.jwt.JwtProperties;
 import com.dnd.health.domain.jwt.dto.SessionUser;
 import com.dnd.health.domain.member.domain.Member;
 import com.dnd.health.domain.member.domain.MemberRepository;
+import com.dnd.health.domain.member.domain.ProviderId;
 import com.dnd.health.domain.member.domain.Role;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
@@ -68,13 +69,14 @@ public class JwtTokenProvider {
         Claims claims = extractAllClaims(accessToken); //claims 정보를 추출할때 유효성 체크를 시작한다.
         String role = claims.get("role").toString();
         String id = claims.getSubject();
-        return new UsernamePasswordAuthenticationToken(getSessionUser(Long.parseLong(id)), "",
+        return new UsernamePasswordAuthenticationToken(getSessionUser(id), "",
                 getGrantedAuthorities(role));
     }
 
-    private SessionUser getSessionUser(long id) {
+    private SessionUser getSessionUser(String id) {
         log.info("session user 를 만들기 위해서 id : {} 인 사람을 찾습니다.", id);
-        Optional<Member> optionalMember = memberRepository.findById(id);
+
+        Optional<Member> optionalMember = memberRepository.findByKakaoId(ProviderId.from(id).to());
 
         if (optionalMember.isEmpty()) {
             throw new JwtException("유효하지 않은 토큰");

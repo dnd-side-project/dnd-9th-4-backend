@@ -1,6 +1,8 @@
 package com.dnd.health.domain.member.application;
 
 
+import com.dnd.health.domain.member.domain.MemberRepository;
+import com.dnd.health.domain.member.domain.ProviderId;
 import com.dnd.health.domain.member.dto.response.LoginResponse;
 import com.dnd.health.domain.member.dto.response.MemberSimpleInfoResponse;
 import com.dnd.health.global.infra.feign.dto.response.KakaoUserInfoResponse;
@@ -22,6 +24,7 @@ public class MemberSignUpService {
 
     private final JwtTokenProvider jwtTokenProvider;
     private final MemberService memberService;
+    private final MemberRepository memberRepository;
 
     public LoginResponse loginGuestMember() {
         Member guest = memberService.saveGuestMember();
@@ -32,11 +35,12 @@ public class MemberSignUpService {
         //카카오 회원 Id를 변조해서 검사해본다.(회원 Id로 해야만 고유성을 가질 수 있기 때문에)
         String id = kakaoUserInfo.getId();
         log.info("kakaoId : {}", id);
-        Optional<Member> loginMember = Optional.ofNullable(memberService.getMemberById(id));
+
+        Optional<Member> isMember = memberRepository.findByKakaoId(ProviderId.from(id).to());
 
         //만약 존재한다면, update 친다.
-        if (loginMember.isPresent()) {
-            Member member = loginMember.get();
+        if (isMember.isPresent()) {
+            Member member = isMember.get();
             updateMemberInfo(kakaoUserInfo, member);
             //토큰 새로 생성이 아닌, 이후에 refreshToken 체크해서 accessToken을 다시 발급해주는 로직을 넣어야 함.
             return createSignUpResult(member);

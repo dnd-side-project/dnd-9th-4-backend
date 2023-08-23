@@ -11,7 +11,7 @@ public class MemberInfoService {
 
     private final MemberService memberService;
 
-    public MemberInfoResponse getMember(long id) {
+    public MemberInfoResponse getMember(String id) {
         Member member = memberService.getMemberById(id);
         return new MemberInfoResponse(member);
     }

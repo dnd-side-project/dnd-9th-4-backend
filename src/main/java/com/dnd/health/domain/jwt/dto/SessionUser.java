@@ -9,11 +9,11 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class SessionUser implements Serializable {
 
-    private final long id;
+    private final String id;
     private final String authority;
 
     public SessionUser(Member member) {
-        this.id = member.getId();
+        this.id = member.getProviderId().to();
         this.authority = member.getRole().getAuthority();
     }
 
