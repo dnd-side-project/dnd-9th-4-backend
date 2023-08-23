@@ -68,13 +68,14 @@ public class JwtTokenProvider {
         Claims claims = extractAllClaims(accessToken); //claims 정보를 추출할때 유효성 체크를 시작한다.
         String role = claims.get("role").toString();
         String id = claims.getSubject();
+        log.info("현재 claims id : "+id);
         return new UsernamePasswordAuthenticationToken(getSessionUser(Long.parseLong(id)), "",
                 getGrantedAuthorities(role));
     }
 
     private SessionUser getSessionUser(long id) {
         log.info("session user 를 만들기 위해서 id : {} 인 사람을 찾습니다.", id);
-        Optional<Member> optionalMember = memberRepository.findById(id);
+        Optional<Member> optionalMember = memberRepository.findByProviderId(id);
 
         if (optionalMember.isEmpty()) {
             throw new JwtException("유효하지 않은 토큰");
