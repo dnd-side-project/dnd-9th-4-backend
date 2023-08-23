@@ -43,11 +43,11 @@ public class MemberService {
         return memberRepository.save(member);
     }
 
-    public Member getMemberById(String id) {
+    public Member getMemberById(long id) {
         log.info("해당 id를 가진 멤버를 찾습니다.");
-        ProviderId providerId = ProviderId.from(id);
-        Optional<Member> findMember = memberRepository.findByKakaoId(providerId);
-        return memberRepository.findById(findMember.get().getId())
+//        ProviderId providerId = ProviderId.from(id);
+//        Optional<Member> findMember = memberRepository.findByKakaoId(providerId);
+        return memberRepository.findById(id)
                 .orElseThrow(() -> new MemberNotFoundException(MEMBER_NOT_FOUND));
     }
 }
