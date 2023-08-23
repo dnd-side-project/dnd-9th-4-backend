@@ -30,9 +30,9 @@ public class MemberSignUpService {
 
     public LoginResponse loginKakaoMember(KakaoUserInfoResponse kakaoUserInfo) {
         //카카오 회원 Id를 변조해서 검사해본다.(회원 Id로 해야만 고유성을 가질 수 있기 때문에)
-        String kakaoId = kakaoUserInfo.getId();
-        log.info("kakaoId : {}", kakaoId);
-        Optional<Member> loginMember = Optional.ofNullable(memberService.getMemberById(kakaoId));
+        String id = kakaoUserInfo.getId();
+        log.info("kakaoId : {}", id);
+        Optional<Member> loginMember = Optional.ofNullable(memberService.getMemberById(id));
 
         //만약 존재한다면, update 친다.
         if (loginMember.isPresent()) {

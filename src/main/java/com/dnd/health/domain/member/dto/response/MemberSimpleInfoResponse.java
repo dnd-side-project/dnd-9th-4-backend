@@ -13,5 +13,4 @@ public class MemberSimpleInfoResponse {
     public MemberSimpleInfoResponse(Member member) {
         this.memberId = member.getId();
     }
-
 }
