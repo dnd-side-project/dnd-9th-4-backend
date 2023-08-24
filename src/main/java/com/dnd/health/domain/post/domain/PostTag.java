@@ -1,5 +1,6 @@
 package com.dnd.health.domain.post.domain;
 
+import javax.persistence.Table;
 import lombok.*;
 
 import javax.persistence.Entity;
@@ -9,6 +10,7 @@ import javax.persistence.Id;
 
 @Entity
 @Getter
+@Table(name = "postTag")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class PostTag {
 

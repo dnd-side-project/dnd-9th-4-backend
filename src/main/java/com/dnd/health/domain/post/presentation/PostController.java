@@ -36,7 +36,8 @@ public class PostController {
 
     @PostMapping
     @PreAuthorize("isAuthenticated()")
-    public ResponseEntity<PostRegisterResponse> register(@AuthenticationPrincipal SessionUser sessionUser, @RequestBody PostRegisterRequest postRequest) {
+    public ResponseEntity<PostRegisterResponse> register(@AuthenticationPrincipal SessionUser sessionUser,
+                                                         @RequestBody PostRegisterRequest postRequest) {
         MemberInfoResponse memberInfo = memberInfoService.getMember(sessionUser.getId());
         PostRegisterResponse postResponse = postService.save(postRequest.toCommand(memberInfo.getMemberId()));
         return ResponseEntity.status(HttpStatus.CREATED).body(postResponse);
@@ -72,14 +73,17 @@ public class PostController {
 
     @GetMapping("/{postId}")
     @PreAuthorize("isAuthenticated()")
-    public ResponseEntity<PostResponse> getPost(@AuthenticationPrincipal SessionUser sessionUser, @PathVariable Long postId) {
+    public ResponseEntity<PostResponse> getPost(@AuthenticationPrincipal SessionUser sessionUser,
+                                                @PathVariable Long postId) {
         PostResponse postResponse = postService.findById(postId);
         return ResponseEntity.ok(postResponse);
     }
 
     @PutMapping("/{postId}")
     @PreAuthorize("isAuthenticated()")
-    public ResponseEntity<PostResponse> updatePost(@AuthenticationPrincipal SessionUser sessionUser, @PathVariable Long postId, @RequestBody PostUpdateRequest postRequest) {
+    public ResponseEntity<PostResponse> updatePost(@AuthenticationPrincipal SessionUser sessionUser,
+                                                   @PathVariable Long postId,
+                                                   @RequestBody PostUpdateRequest postRequest) {
         PostResponse postResponse = postService.update(postRequest.toCommand(postId));
         return ResponseEntity.ok(postResponse);
     }
