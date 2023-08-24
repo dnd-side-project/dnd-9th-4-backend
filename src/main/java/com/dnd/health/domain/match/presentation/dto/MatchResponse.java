@@ -2,6 +2,8 @@ package com.dnd.health.domain.match.presentation.dto;
 
 import com.dnd.health.domain.match.domain.Match;
 import com.dnd.health.domain.match.domain.MatchStatus;
+import com.dnd.health.domain.member.domain.Member;
+import com.dnd.health.domain.post.domain.Post;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,10 +20,10 @@ public class MatchResponse {
 
     private MatchStatus status;
 
-    public MatchResponse(Match match) {
+    public MatchResponse(Match match, long postId, long memberId) {
         this.id = match.getId();
-        this.postId = match.getPost().getId();
-        this.memberId = match.getMember().getId();
+        this.postId = postId;
+        this.memberId = memberId;
         this.status = match.getMatchStatus();
     }
 }

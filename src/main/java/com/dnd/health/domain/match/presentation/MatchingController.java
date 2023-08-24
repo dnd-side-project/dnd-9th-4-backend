@@ -4,7 +4,9 @@ import com.dnd.health.domain.jwt.dto.SessionUser;
 import com.dnd.health.domain.match.application.MatchingService;
 import com.dnd.health.domain.match.presentation.dto.*;
 import com.dnd.health.domain.member.application.MemberInfoService;
+import com.dnd.health.domain.member.domain.Member;
 import com.dnd.health.domain.member.dto.response.MemberInfoResponse;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -48,7 +50,8 @@ public class MatchingController {
     @GetMapping("/{postId}")
     public ResponseEntity<MatchResponse> getMatchStatus(@AuthenticationPrincipal SessionUser sessionUser, @PathVariable Long postId) {
         MemberInfoResponse memberInfo = memberInfoService.getMember(sessionUser.getId());
-        MatchResponse match = matchingService.getMatch(postId, memberInfo.getMemberId());
+        Optional<Member> member = Optional.ofNullable(memberInfoService.getNewPleMember(memberInfo.getMemberId()));
+        MatchResponse match = matchingService.getMatch(postId, member.get().getId());
         return ResponseEntity.ok(match);
     }
 

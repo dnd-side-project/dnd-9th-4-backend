@@ -15,4 +15,8 @@ public class MemberInfoService {
         Member member = memberService.getMemberById(id);
         return new MemberInfoResponse(member);
     }
+
+    public Member getNewPleMember(long id) {
+        return memberService.getMemberById(id);
+    }
 }

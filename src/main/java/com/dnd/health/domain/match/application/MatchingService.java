@@ -55,7 +55,8 @@ public class MatchingService {
     public MatchResponse getMatch(Long postId, Long memberId) {
         Match match = matchingRepository.findByPostIdAndMemberId(postId, memberId)
                 .orElseThrow(() -> new MatchNotFoundException(ErrorCode.MATCH_NOT_FOUND));
-        return new MatchResponse(match);
+
+        return new MatchResponse(match, postId, memberId);
     }
 
     public void delete(Long postId, Long memberId) {
