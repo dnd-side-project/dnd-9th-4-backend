@@ -47,7 +47,7 @@ public class MemberService {
         log.info("해당 id를 가진 멤버를 찾습니다.");
 //        ProviderId providerId = ProviderId.from(id);
 //        Optional<Member> findMember = memberRepository.findByKakaoId(providerId);
-        return memberRepository.findByKakaoId(ProviderId.from(id).to())
+        return memberRepository.findByKakaoId(id)
                 .orElseThrow(() -> new MemberNotFoundException(MEMBER_NOT_FOUND));
     }
 }
