@@ -1,5 +1,6 @@
 package com.dnd.health.domain.post.domain;
 
+import com.dnd.health.domain.member.domain.Role;
 import com.dnd.health.domain.profile.domain.Region;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -15,7 +16,7 @@ public interface PostRepository extends JpaRepository<Post, Long> {
     List<Post> findAllByRegion(Region region);
 
 
-    List<Post> findAllByMember_RoleAndMember_Id(String role, Long memberId);
+    List<Post> findAllByMember_RoleAndMember_Id(Role role, Long memberId);
 
     @Transactional
     @Modifying

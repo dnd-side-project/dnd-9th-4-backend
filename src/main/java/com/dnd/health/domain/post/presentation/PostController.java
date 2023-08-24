@@ -48,7 +48,7 @@ public class PostController {
     public ResponseEntity<List<PostResponse>> getAllPost(@AuthenticationPrincipal SessionUser sessionUser) {
         Optional<Member> member = memberRepository.findByKakaoId(sessionUser.getId());
         Member isMember = member.get();
-        List<PostResponse> postResponses = postService.findAll(isMember.getId(), isMember.getRole().getAuthority());
+        List<PostResponse> postResponses = postService.findAll(isMember.getId(), isMember.getRole());
         return ResponseEntity.ok(postResponses);
     }
 

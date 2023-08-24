@@ -2,6 +2,7 @@ package com.dnd.health.domain.post.application;
 
 import com.dnd.health.domain.member.domain.Member;
 import com.dnd.health.domain.member.domain.MemberRepository;
+import com.dnd.health.domain.member.domain.Role;
 import com.dnd.health.domain.member.exception.MemberNotFoundException;
 import com.dnd.health.domain.post.application.dto.PostRegisterCommand;
 import com.dnd.health.domain.post.application.dto.PostUpdateCommand;
@@ -50,8 +51,8 @@ public class PostService {
 //                .collect(Collectors.toList());
 //    }
 
-    public List<PostResponse> findAll(long id, String role) {
-        return postRepository.findAllByMember_RoleAndMember_Id(role.toUpperCase(Locale.ROOT), id).stream()
+    public List<PostResponse> findAll(long id, Role role) {
+        return postRepository.findAllByMember_RoleAndMember_Id(role, id).stream()
                 .map(PostResponse::new)
                 .collect(Collectors.toList());
     }
