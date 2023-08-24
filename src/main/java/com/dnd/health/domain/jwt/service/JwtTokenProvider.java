@@ -77,7 +77,7 @@ public class JwtTokenProvider {
     private SessionUser getSessionUser(String id) {
         log.info("session user 를 만들기 위해서 id : {} 인 사람을 찾습니다.", id);
 
-        Optional<Member> optionalMember = memberRepository.findByKakaoId(ProviderId.from(id).to());
+        Optional<Member> optionalMember = memberRepository.findByKakaoId(id);
 
         if (optionalMember.isEmpty()) {
             throw new JwtException("유효하지 않은 토큰");

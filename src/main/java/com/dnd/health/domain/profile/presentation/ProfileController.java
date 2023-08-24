@@ -8,6 +8,7 @@ import com.dnd.health.domain.member.dto.response.MemberInfoResponse;
 import com.dnd.health.domain.profile.application.ProfileService;
 import com.dnd.health.domain.profile.presentation.dto.*;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.coyote.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Slf4j
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/profile")
@@ -36,6 +38,7 @@ public class ProfileController {
     @GetMapping("/memberId")
     @PreAuthorize("isAuthenticated()")
     public ResponseEntity<ProfileResponse> getProfile(@AuthenticationPrincipal SessionUser sessionUser) {
+        log.info("sessionUser info = {}", sessionUser);
         MemberInfoResponse memberInfo = memberInfoService.getMember(sessionUser.getId());
         ProfileResponse profileResponse = profileService.getProfile(memberInfo.getMemberId());
         return ResponseEntity.ok(profileResponse);
