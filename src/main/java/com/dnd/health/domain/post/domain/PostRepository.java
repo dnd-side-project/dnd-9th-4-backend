@@ -13,7 +13,7 @@ import java.util.List;
 
 public interface PostRepository extends JpaRepository<Post, Long> {
 
-    List<Post> findAllByPostRegion(String region);
+    List<Post> findAllByRegionValue(String region);
 
     List<Post> findAllByMember_Role(Role role);
 

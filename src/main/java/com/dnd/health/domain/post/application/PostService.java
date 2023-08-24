@@ -7,6 +7,7 @@ import com.dnd.health.domain.member.exception.MemberNotFoundException;
 import com.dnd.health.domain.post.application.dto.PostRegisterCommand;
 import com.dnd.health.domain.post.application.dto.PostUpdateCommand;
 import com.dnd.health.domain.post.domain.Post;
+import com.dnd.health.domain.post.domain.PostRegion;
 import com.dnd.health.domain.post.domain.PostRepository;
 import com.dnd.health.domain.post.exception.PostNotFoundException;
 import com.dnd.health.domain.post.presentation.dto.PostRegisterResponse;
@@ -78,7 +79,7 @@ public class PostService {
     public List<PostResponse> findSomePost(Long memberId) {
         Member member = memberRepository.findById(memberId)
                 .orElseThrow(() -> new MemberNotFoundException(ErrorCode.MEMBER_NOT_FOUND));
-        List<Post> posts = postRepository.findAllByPostRegion(member.getProfile().getRegion().to());
+        List<Post> posts = postRepository.findAllByRegionValue(member.getProfile().getRegion().to());
         if(posts.size() >= 4) posts = posts.subList(0, 3);
         return posts.stream()
                 .map(PostResponse::new)
