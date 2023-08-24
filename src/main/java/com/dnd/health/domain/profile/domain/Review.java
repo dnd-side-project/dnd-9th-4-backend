@@ -10,6 +10,7 @@ import java.util.List;
 @Entity
 @Getter
 @Builder
+@Table(name = "review")
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Review {
