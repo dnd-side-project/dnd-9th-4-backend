@@ -46,9 +46,7 @@ public class PostController {
     @GetMapping
     @PreAuthorize("isAuthenticated()")
     public ResponseEntity<List<PostResponse>> getAllPost(@AuthenticationPrincipal SessionUser sessionUser) {
-        Optional<Member> member = memberRepository.findByKakaoId(sessionUser.getId());
-        Member isMember = member.get();
-        List<PostResponse> postResponses = postService.findAll(isMember.getId());
+        List<PostResponse> postResponses = postService.findAll();
         return ResponseEntity.ok(postResponses);
     }
 

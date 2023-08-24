@@ -16,7 +16,7 @@ public interface PostRepository extends JpaRepository<Post, Long> {
     List<Post> findAllByRegion(Region region);
 
 
-    List<Post> findAllByMember_RoleAndMember_Id(Role role, Long memberId);
+    List<Post> findAllByMember_Role(Role role);
 
     @Transactional
     @Modifying
