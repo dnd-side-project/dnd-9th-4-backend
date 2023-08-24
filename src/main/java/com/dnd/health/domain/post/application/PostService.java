@@ -16,6 +16,7 @@ import com.dnd.health.domain.profile.presentation.dto.RecruitedPostResponse;
 import com.dnd.health.global.exception.ErrorCode;
 import java.util.Locale;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,6 +24,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@Slf4j
 @RequiredArgsConstructor
 @Transactional
 public class PostService {
@@ -51,8 +53,8 @@ public class PostService {
 //                .collect(Collectors.toList());
 //    }
 
-    public List<PostResponse> findAll(long id, Role role) {
-        return postRepository.findAllByMember_RoleAndMember_Id(role, id).stream()
+    public List<PostResponse> findAll(long id) {
+        return postRepository.findAllByMember_RoleAndMember_Id(Role.ROLE_MEMBER, id).stream()
                 .map(PostResponse::new)
                 .collect(Collectors.toList());
     }
