@@ -34,6 +34,7 @@ public class Member {
 //    @Embedded
 //    private ProviderId providerId;
 
+    @Column(name = "provider_id")
     private String providerId;
 
     @Enumerated(EnumType.STRING)
