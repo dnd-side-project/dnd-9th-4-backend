@@ -8,13 +8,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class MessageSendRequest {
 
-    private Long senderId;
-
     private Long receiverId;
 
     private String content;
 
-    public MessageSendCommand toCommand() {
+    public MessageSendCommand toCommand(Long senderId) {
         return new MessageSendCommand(senderId, receiverId, content);
     }
 }

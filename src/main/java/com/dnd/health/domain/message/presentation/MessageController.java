@@ -23,7 +23,8 @@ public class MessageController {
 
     @PostMapping()
     public ResponseEntity<Void> sendMessage(@AuthenticationPrincipal SessionUser sessionUser, @RequestBody MessageSendRequest messageRequest) {
-        messageService.sendMessage(messageRequest.toCommand());
+        MemberInfoResponse memberInfo = memberInfoService.getMember(sessionUser.getId());
+        messageService.sendMessage(messageRequest.toCommand(memberInfo.getMemberId()));
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
