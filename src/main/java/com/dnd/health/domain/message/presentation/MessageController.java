@@ -37,7 +37,8 @@ public class MessageController {
 
     @PostMapping("/conversation")
     public ResponseEntity<ConversationResponse> getConversation(@AuthenticationPrincipal SessionUser sessionUser,@RequestBody ConversationRequest conversationRequest) {
-        ConversationResponse conversation = messageService.getConversation(conversationRequest.getMemberId(), conversationRequest.getReceiverId());
+        MemberInfoResponse memberInfo = memberInfoService.getMember(sessionUser.getId());
+        ConversationResponse conversation = messageService.getConversation(memberInfo.getMemberId(), conversationRequest.getReceiverId());
         return ResponseEntity.ok(conversation);
     }
 

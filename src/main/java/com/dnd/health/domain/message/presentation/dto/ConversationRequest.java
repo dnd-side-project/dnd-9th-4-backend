@@ -5,7 +5,5 @@ import lombok.Getter;
 @Getter
 public class ConversationRequest {
 
-    private Long memberId;
-
     private Long receiverId;
 }
