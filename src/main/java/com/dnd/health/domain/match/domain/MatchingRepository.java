@@ -17,7 +17,7 @@ public interface MatchingRepository extends JpaRepository<Match, Long> {
 
     @Transactional
     @Modifying
-    @Query( value = "update Matchs m set m.match_status = :status where m.application_post_id = :postId and m.applicant_id = :applicantId",
+    @Query( value = "update matchs m set m.match_status = :status where m.application_post_id = :postId and m.applicant_id = :applicantId",
             nativeQuery = true)
     void setMatchStatus(@Param("postId") Long postId, @Param("applicantId") Long applicantId, @Param("status") String status);
 
