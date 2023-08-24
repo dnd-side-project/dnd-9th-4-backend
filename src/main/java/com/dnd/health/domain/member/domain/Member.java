@@ -31,8 +31,10 @@ public class Member {
     @Column(name = "member_id")
     private Long id;
 
-    @Embedded
-    private ProviderId providerId;
+//    @Embedded
+//    private ProviderId providerId;
+
+    private String providerId;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "oauth2_Provider")
@@ -74,7 +76,7 @@ public class Member {
                   final Role role, final String password, final String email,
                   final String gender, final String age,
                   final OAuth2Provider oAuth2Provider, final String profileUrl) {
-        this.providerId = ProviderId.from(providerId);
+        this.providerId = providerId;
         this.username = Username.from(username);
         this.password = Password.from(password);
         this.email = Email.from(email);

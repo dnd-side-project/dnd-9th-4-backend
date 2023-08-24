@@ -13,7 +13,7 @@ public class SessionUser implements Serializable {
     private final String authority;
 
     public SessionUser(Member member) {
-        this.id = member.getProviderId().to();
+        this.id = member.getProviderId();
         this.authority = member.getRole().getAuthority();
     }
 

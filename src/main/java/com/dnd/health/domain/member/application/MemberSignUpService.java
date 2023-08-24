@@ -55,7 +55,7 @@ public class MemberSignUpService {
      * member 정보를 가지고 accessToken 과 refreshToken 을 생성한다.
      */
     private LoginResponse createSignUpResult(Member member) {
-        String accessToken = jwtTokenProvider.createAccessToken(member.getProviderId().to(), member.getRole());
+        String accessToken = jwtTokenProvider.createAccessToken(member.getProviderId(), member.getRole());
         String refreshToken = jwtTokenProvider.createRefreshToken(member.getId());
 
         // refreshToken은 redis에 따로 저장해둔다.

@@ -14,7 +14,7 @@ public class MemberSimpleInfoResponse {
     private final long memberId;
 
     public MemberSimpleInfoResponse(Member member) {
-        this.kakaoId = member.getProviderId().to();
+        this.kakaoId = member.getProviderId();
         this.memberId = member.getId();
     }
 }
