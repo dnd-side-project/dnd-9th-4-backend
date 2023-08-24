@@ -35,18 +35,18 @@ public class SwaggerConfig {
                 .apiInfo(apiInfo());
     }
 
-//    //Authorization이 필요없는 API
-//    @Bean
-//    public Docket nonSecuredApi() {
-//        return new Docket(DocumentationType.OAS_30)
-//                .groupName("Non-Security API")
-//                .select()
-//                .apis(withoutMethodAnnotation(PreAuthorize.class))
-//                .apis(RequestHandlerSelectors.basePackage("com.dnd.health.domain"))
-//                .apis(RequestHandlerSelectors.basePackage("com.dnd.health"))
-//                .build()
-//                .apiInfo(apiInfo());
-//    }
+    //Authorization이 필요없는 API
+    @Bean
+    public Docket nonSecuredApi() {
+        return new Docket(DocumentationType.OAS_30)
+                .groupName("Non-Security API")
+                .select()
+                .apis(withoutMethodAnnotation(PreAuthorize.class))
+                .apis(RequestHandlerSelectors.basePackage("com.dnd.health.domain"))
+                .apis(RequestHandlerSelectors.basePackage("com.dnd.health"))
+                .build()
+                .apiInfo(apiInfo());
+    }
 
     //Authorization이 필요한 API
     @Bean

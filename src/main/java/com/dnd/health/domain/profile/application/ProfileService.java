@@ -61,7 +61,7 @@ public class ProfileService {
     }
 
     private String calculateGpa(List<Review> reviews) {
-        double gpa = reviews.stream().mapToInt(Review::getScore).sum() / (double)reviews.size();
+        double gpa = reviews.isEmpty() ? 0.0 : (reviews.stream().mapToInt(Review::getScore).average().getAsDouble());
         return Double.toString(gpa);
     }
 
