@@ -11,6 +11,7 @@ import java.time.format.DateTimeFormatter;
 @Entity
 @Builder
 @Getter
+@Table(name = "message")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 public class Message {
