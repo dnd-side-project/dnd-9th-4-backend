@@ -2,11 +2,14 @@ package com.dnd.health.domain.post.presentation;
 
 import com.dnd.health.domain.jwt.dto.SessionUser;
 import com.dnd.health.domain.member.application.MemberInfoService;
+import com.dnd.health.domain.member.domain.Member;
+import com.dnd.health.domain.member.domain.MemberRepository;
 import com.dnd.health.domain.member.dto.response.MemberInfoResponse;
 import com.dnd.health.domain.post.application.PostService;
 import com.dnd.health.domain.post.presentation.dto.*;
 
 import com.dnd.health.domain.profile.presentation.dto.RecruitedPostResponse;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,6 +25,7 @@ import java.util.List;
 public class PostController {
 
     private final MemberInfoService memberInfoService;
+    private final MemberRepository memberRepository;
     private final PostService postService;
 
     @PostMapping
@@ -32,10 +36,19 @@ public class PostController {
         return ResponseEntity.status(HttpStatus.CREATED).body(postResponse);
     }
 
+//    @GetMapping
+//    @PreAuthorize("isAuthenticated()")
+//    public ResponseEntity<List<PostResponse>> getAllPost(@AuthenticationPrincipal SessionUser sessionUser) {
+//        List<PostResponse> postResponses = postService.findAll();
+//        return ResponseEntity.ok(postResponses);
+//    }
+
     @GetMapping
     @PreAuthorize("isAuthenticated()")
     public ResponseEntity<List<PostResponse>> getAllPost(@AuthenticationPrincipal SessionUser sessionUser) {
-        List<PostResponse> postResponses = postService.findAll();
+        Optional<Member> member = memberRepository.findByKakaoId(sessionUser.getId());
+        Member isMember = member.get();
+        List<PostResponse> postResponses = postService.findAll(isMember.getId(), isMember.getRole().getAuthority());
         return ResponseEntity.ok(postResponses);
     }
 

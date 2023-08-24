@@ -14,6 +14,9 @@ public interface PostRepository extends JpaRepository<Post, Long> {
 
     List<Post> findAllByRegion(Region region);
 
+
+    List<Post> findAllByMember_RoleAndMember_Id(String role, Long memberId);
+
     @Transactional
     @Modifying
     @Query( value = "update Post p set p.status = :status where p.post_id = :postId",

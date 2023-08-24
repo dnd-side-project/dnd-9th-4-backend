@@ -43,8 +43,14 @@ public class PostService {
         return new PostResponse(post);
     }
 
-    public List<PostResponse> findAll() {
-        return postRepository.findAll().stream()
+//    public List<PostResponse> findAll() {
+//        return postRepository.findAll().stream()
+//                .map(PostResponse::new)
+//                .collect(Collectors.toList());
+//    }
+
+    public List<PostResponse> findAll(long id, String role) {
+        return postRepository.findAllByMember_RoleAndMember_Id(role, id).stream()
                 .map(PostResponse::new)
                 .collect(Collectors.toList());
     }
