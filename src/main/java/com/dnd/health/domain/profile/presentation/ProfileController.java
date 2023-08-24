@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.apache.coyote.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,6 +26,7 @@ public class ProfileController {
     private final ProfileService profileService;
 
     @PostMapping
+    @PreAuthorize("isAuthenticated()")
     public ResponseEntity<Void> register(@AuthenticationPrincipal SessionUser sessionUser, @RequestBody ProfileRegisterRequest profileRequest) {
         MemberInfoResponse memberInfo = memberInfoService.getMember(sessionUser.getId());
         profileService.save(profileRequest.toCommand(memberInfo.getMemberId()));
@@ -32,6 +34,7 @@ public class ProfileController {
     }
 
     @GetMapping("/memberId")
+    @PreAuthorize("isAuthenticated()")
     public ResponseEntity<ProfileResponse> getProfile(@AuthenticationPrincipal SessionUser sessionUser) {
         MemberInfoResponse memberInfo = memberInfoService.getMember(sessionUser.getId());
         ProfileResponse profileResponse = profileService.getProfile(memberInfo.getMemberId());
@@ -39,6 +42,7 @@ public class ProfileController {
     }
 
     @PutMapping
+    @PreAuthorize("isAuthenticated()")
     public ResponseEntity<Void> update(@AuthenticationPrincipal SessionUser sessionUser, @RequestBody ProfileUpdateRequest profileRequest) {
         MemberInfoResponse memberInfo = memberInfoService.getMember(sessionUser.getId());
         profileService.update(profileRequest.toCommand(memberInfo.getMemberId()));
@@ -46,6 +50,7 @@ public class ProfileController {
     }
 
     @GetMapping("/around")
+    @PreAuthorize("isAuthenticated()")
     public ResponseEntity<List<MateResponse>> getMatesAround(@AuthenticationPrincipal SessionUser sessionUser) {
         MemberInfoResponse memberInfo = memberInfoService.getMember(sessionUser.getId());
         List<MateResponse> mateResponses = profileService.getMatesAround(memberInfo.getMemberId());

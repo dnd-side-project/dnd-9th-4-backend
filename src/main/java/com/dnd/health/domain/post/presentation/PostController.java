@@ -10,6 +10,7 @@ import com.dnd.health.domain.profile.presentation.dto.RecruitedPostResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,6 +25,7 @@ public class PostController {
     private final PostService postService;
 
     @PostMapping
+    @PreAuthorize("isAuthenticated()")
     public ResponseEntity<PostRegisterResponse> register(@AuthenticationPrincipal SessionUser sessionUser, @RequestBody PostRegisterRequest postRequest) {
         MemberInfoResponse memberInfo = memberInfoService.getMember(sessionUser.getId());
         PostRegisterResponse postResponse = postService.save(postRequest.toCommand(memberInfo.getMemberId()));
@@ -31,12 +33,14 @@ public class PostController {
     }
 
     @GetMapping
+    @PreAuthorize("isAuthenticated()")
     public ResponseEntity<List<PostResponse>> getAllPost(@AuthenticationPrincipal SessionUser sessionUser) {
         List<PostResponse> postResponses = postService.findAll();
         return ResponseEntity.ok(postResponses);
     }
 
     @GetMapping("/simple")
+    @PreAuthorize("isAuthenticated()")
     public ResponseEntity<List<PostResponse>> getSomePost(@AuthenticationPrincipal SessionUser sessionUser) {
         MemberInfoResponse memberInfo = memberInfoService.getMember(sessionUser.getId());
         List<PostResponse> postResponses = postService.findSomePost(memberInfo.getMemberId());
@@ -44,6 +48,7 @@ public class PostController {
     }
 
     @GetMapping("/my")
+    @PreAuthorize("isAuthenticated()")
     public ResponseEntity<List<WrittenPostResponse>> getMyPosts(@AuthenticationPrincipal SessionUser sessionUser) {
         MemberInfoResponse memberInfo = memberInfoService.getMember(sessionUser.getId());
         List<WrittenPostResponse> postResponses = postService.findMyPosts(memberInfo.getMemberId());
@@ -51,18 +56,21 @@ public class PostController {
     }
 
     @GetMapping("/{postId}")
+    @PreAuthorize("isAuthenticated()")
     public ResponseEntity<PostResponse> getPost(@AuthenticationPrincipal SessionUser sessionUser, @PathVariable Long postId) {
         PostResponse postResponse = postService.findById(postId);
         return ResponseEntity.ok(postResponse);
     }
 
     @PutMapping("/{postId}")
+    @PreAuthorize("isAuthenticated()")
     public ResponseEntity<PostResponse> updatePost(@AuthenticationPrincipal SessionUser sessionUser, @PathVariable Long postId, @RequestBody PostUpdateRequest postRequest) {
         PostResponse postResponse = postService.update(postRequest.toCommand(postId));
         return ResponseEntity.ok(postResponse);
     }
 
     @DeleteMapping("/{postId}")
+    @PreAuthorize("isAuthenticated()")
     public ResponseEntity<Void> deletePost(@PathVariable Long postId) {
         postService.delete(postId);
         return ResponseEntity.status(HttpStatus.CREATED).build();

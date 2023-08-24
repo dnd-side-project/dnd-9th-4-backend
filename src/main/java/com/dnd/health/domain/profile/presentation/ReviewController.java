@@ -10,6 +10,7 @@ import com.dnd.health.domain.profile.presentation.dto.ReviewResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,6 +25,7 @@ public class ReviewController {
     private final ReviewService reviewService;
 
     @PostMapping
+    @PreAuthorize("isAuthenticated()")
     public ResponseEntity<Void> review(@AuthenticationPrincipal SessionUser sessionUser, @RequestBody ReviewRequest reviewRequest) {
         MemberInfoResponse memberInfo = memberInfoService.getMember(sessionUser.getId());
         reviewService.review(reviewRequest.toCommand(memberInfo.getMemberId()));
@@ -31,6 +33,7 @@ public class ReviewController {
     }
 
     @GetMapping
+    @PreAuthorize("isAuthenticated()")
     public ResponseEntity<List<ReviewResponse>> getReviews(@AuthenticationPrincipal SessionUser sessionUser) {
         MemberInfoResponse memberInfo = memberInfoService.getMember(sessionUser.getId());
         List<ReviewResponse> reviewResponse = reviewService.getReviews(memberInfo.getMemberId());
