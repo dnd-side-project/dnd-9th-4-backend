@@ -1,14 +1,18 @@
 package com.dnd.health.domain.post.presentation;
 
+import static com.dnd.health.global.exception.ErrorCode.MEMBER_NOT_FOUND;
+
 import com.dnd.health.domain.jwt.dto.SessionUser;
 import com.dnd.health.domain.member.application.MemberInfoService;
 import com.dnd.health.domain.member.domain.Member;
 import com.dnd.health.domain.member.domain.MemberRepository;
 import com.dnd.health.domain.member.dto.response.MemberInfoResponse;
+import com.dnd.health.domain.member.exception.MemberNotFoundException;
 import com.dnd.health.domain.post.application.PostService;
 import com.dnd.health.domain.post.presentation.dto.*;
 
 import com.dnd.health.domain.profile.presentation.dto.RecruitedPostResponse;
+import com.dnd.health.global.exception.ErrorCode;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -39,7 +43,11 @@ public class PostController {
     @GetMapping
     @PreAuthorize("isAuthenticated()")
     public ResponseEntity<List<PostResponse>> getAllPost(@AuthenticationPrincipal SessionUser sessionUser) {
-        List<PostResponse> postResponses = postService.findAll();
+        String id = sessionUser.getId();
+        Optional<Member> isMember = memberRepository.findByProviderId(id);
+        Member member = isMember.orElseThrow(() -> new MemberNotFoundException(MEMBER_NOT_FOUND));
+
+        List<PostResponse> postResponses = postService.findAll(member);
         return ResponseEntity.ok(postResponses);
     }
 

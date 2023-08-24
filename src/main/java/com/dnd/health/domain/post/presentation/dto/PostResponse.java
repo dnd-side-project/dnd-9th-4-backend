@@ -1,5 +1,6 @@
 package com.dnd.health.domain.post.presentation.dto;
 
+import com.dnd.health.domain.member.domain.Member;
 import com.dnd.health.domain.post.domain.Post;
 import com.dnd.health.domain.post.domain.PostStatus;
 import com.dnd.health.domain.common.Sport;
@@ -46,6 +47,27 @@ public class PostResponse {
     private String runtime;
 
     private PostStatus status;
+
+    public PostResponse(Post post, Member member) {
+        this.id = post.getId();
+        this.memberId = member.getId();
+        this.writerUsername = member.getUsername().to();
+        this.writerGender = member.getGender().to();
+        this.writerAge = member.getAge().to();
+        this.writerProfileImg = member.getProfile().getProfileImg();
+        this.writtenDate = post.getWrittenDate();
+        this.sport = post.getSport();
+        this.region = post.getRegion().to();
+        this.tags = post.getTags().stream()
+                .map(tag -> tag.getTag())
+                .collect(Collectors.toList());
+        this.title = post.getTitle().to();
+        this.content = post.getContent().to();
+        this.age = post.getWanted().getAge();
+        this.gender = post.getWanted().getGender();
+        this.runtime = post.getWanted().getRuntime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        this.status = post.getStatus();
+    }
 
     public PostResponse(Post post) {
         this.id = post.getId();

@@ -16,7 +16,7 @@ public enum ErrorCode {
     RESOURCE_FORBIDDEN(HttpStatus.FORBIDDEN, "ERR_FORBIDDEN", "해당 리소스에 대한 권한이 없습니다."),
 
     // Member
-    MEMBER_NOT_FOUND(HttpStatus.NOT_FOUND, "ERR_MEMBER_NOT_FOUND", "해당 UUID를 가진 멤버를 찾을 수 없습니다."),
+    MEMBER_NOT_FOUND(HttpStatus.NOT_FOUND, "ERR_MEMBER_NOT_FOUND", "해당 ID를 가진 멤버를 찾을 수 없습니다."),
 
     // JWT
     EXPIRED_REFRESH_TOKEN(HttpStatus.UNAUTHORIZED, "ERR_EXPIRED_REFRESH_TOKEN", "만료된 리프레시 토큰입니다."),
