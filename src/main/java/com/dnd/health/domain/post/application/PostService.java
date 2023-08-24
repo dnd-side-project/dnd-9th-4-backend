@@ -78,7 +78,7 @@ public class PostService {
     public List<PostResponse> findSomePost(Long memberId) {
         Member member = memberRepository.findById(memberId)
                 .orElseThrow(() -> new MemberNotFoundException(ErrorCode.MEMBER_NOT_FOUND));
-        List<Post> posts = postRepository.findAllByPostRegion(member.getProfile().getRegion());
+        List<Post> posts = postRepository.findAllByPostRegion(member.getProfile().getRegion().to());
         if(posts.size() >= 4) posts = posts.subList(0, 3);
         return posts.stream()
                 .map(PostResponse::new)
