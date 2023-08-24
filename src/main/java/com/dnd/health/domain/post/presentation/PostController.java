@@ -36,13 +36,6 @@ public class PostController {
         return ResponseEntity.status(HttpStatus.CREATED).body(postResponse);
     }
 
-//    @GetMapping
-//    @PreAuthorize("isAuthenticated()")
-//    public ResponseEntity<List<PostResponse>> getAllPost(@AuthenticationPrincipal SessionUser sessionUser) {
-//        List<PostResponse> postResponses = postService.findAll();
-//        return ResponseEntity.ok(postResponses);
-//    }
-
     @GetMapping
     @PreAuthorize("isAuthenticated()")
     public ResponseEntity<List<PostResponse>> getAllPost(@AuthenticationPrincipal SessionUser sessionUser) {

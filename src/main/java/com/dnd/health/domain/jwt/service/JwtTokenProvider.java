@@ -4,7 +4,6 @@ import com.dnd.health.domain.jwt.JwtProperties;
 import com.dnd.health.domain.jwt.dto.SessionUser;
 import com.dnd.health.domain.member.domain.Member;
 import com.dnd.health.domain.member.domain.MemberRepository;
-import com.dnd.health.domain.member.domain.ProviderId;
 import com.dnd.health.domain.member.domain.Role;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;

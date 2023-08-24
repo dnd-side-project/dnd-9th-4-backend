@@ -31,9 +31,6 @@ public class Member {
     @Column(name = "member_id")
     private Long id;
 
-//    @Embedded
-//    private ProviderId providerId;
-
     @Column(name = "provider_id")
     private String providerId;
 

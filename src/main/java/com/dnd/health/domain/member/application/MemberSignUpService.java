@@ -2,7 +2,6 @@ package com.dnd.health.domain.member.application;
 
 
 import com.dnd.health.domain.member.domain.MemberRepository;
-import com.dnd.health.domain.member.domain.ProviderId;
 import com.dnd.health.domain.member.dto.response.LoginResponse;
 import com.dnd.health.domain.member.dto.response.MemberSimpleInfoResponse;
 import com.dnd.health.global.infra.feign.dto.response.KakaoUserInfoResponse;
@@ -36,7 +35,7 @@ public class MemberSignUpService {
         String id = kakaoUserInfo.getId();
         log.info("kakaoId : {}", id);
 
-        Optional<Member> isMember = memberRepository.findByKakaoId(ProviderId.from(id).to());
+        Optional<Member> isMember = memberRepository.findByKakaoId(id);
 
         //만약 존재한다면, update 친다.
         if (isMember.isPresent()) {

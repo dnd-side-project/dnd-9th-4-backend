@@ -5,7 +5,6 @@ import static com.dnd.health.global.exception.ErrorCode.MEMBER_NOT_FOUND;
 import com.dnd.health.domain.member.domain.Member;
 import com.dnd.health.domain.member.domain.MemberRepository;
 import com.dnd.health.domain.member.domain.OAuth2Provider;
-import com.dnd.health.domain.member.domain.ProviderId;
 import com.dnd.health.domain.member.exception.MemberNotFoundException;
 import com.dnd.health.domain.member.domain.Role;
 import java.util.Optional;
