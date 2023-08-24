@@ -9,6 +9,7 @@ import javax.persistence.*;
 @Entity
 @Getter
 @Embeddable
+@Table(name = "review_message")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class ReviewMessage {
 
