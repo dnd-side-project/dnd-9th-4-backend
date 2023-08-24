@@ -19,7 +19,7 @@ public interface PostRepository extends JpaRepository<Post, Long> {
 
     @Transactional
     @Modifying
-    @Query( value = "update Post p set p.status = :status where p.post_id = :postId",
+    @Query( value = "update post p set p.status = :status where p.post_id = :postId",
             nativeQuery = true)
     int setPostStatusCompleted(@PathParam("status") String status, Long postId);
 
@@ -29,7 +29,7 @@ public interface PostRepository extends JpaRepository<Post, Long> {
 
     @Transactional
     @Modifying
-    @Query( value = "update Post p set p.matched_member_id = :applicantId where p.post_id = :postId",
+    @Query( value = "update post p set p.matched_member_id = :applicantId where p.post_id = :postId",
             nativeQuery = true)
     void setMatchedMemberId(Long applicantId, Long postId);
 }
