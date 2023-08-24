@@ -114,6 +114,12 @@ public class ProfileService {
                 .orElseThrow(() -> new ProfileNotFoundException(ErrorCode.PROFILE_NOT_FOUND));
         List<Profile> matesAround = profileRepository.findAllByRegionAndMemberIdNot(profile.getRegion(), memberId);
         if(matesAround.size() > 20) matesAround = matesAround.subList(0, 20);
-        return matesAround.stream().map(MateResponse::new).collect(Collectors.toList());
+        List<MateResponse> mateResponses = new ArrayList<>();
+        matesAround.stream().forEach((mate) -> {
+            Member member = memberRepository.findById(mate.getMember().getId())
+                    .orElseThrow(() -> new MemberNotFoundException(ErrorCode.MEMBER_NOT_FOUND));
+            mateResponses.add(new MateResponse(mate, member));
+        });
+        return mateResponses;
     }
 }
