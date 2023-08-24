@@ -15,6 +15,7 @@ import com.dnd.health.domain.profile.presentation.dto.RecruitedPostResponse;
 import com.dnd.health.global.exception.ErrorCode;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -24,6 +25,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@Slf4j
 @RequestMapping("/api/post")
 @RequiredArgsConstructor
 public class PostController {
@@ -44,7 +46,8 @@ public class PostController {
     @PreAuthorize("isAuthenticated()")
     public ResponseEntity<List<PostResponse>> getAllPost(@AuthenticationPrincipal SessionUser sessionUser) {
         String id = sessionUser.getId();
-        Optional<Member> isMember = memberRepository.findByProviderId(id);
+        log.info("session User id = {}", id);
+        Optional<Member> isMember = memberRepository.findByKakaoId(id);
         Member member = isMember.orElseThrow(() -> new MemberNotFoundException(MEMBER_NOT_FOUND));
 
         List<PostResponse> postResponses = postService.findAll(member);
