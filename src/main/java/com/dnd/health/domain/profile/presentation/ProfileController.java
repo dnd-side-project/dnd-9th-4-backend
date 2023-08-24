@@ -35,12 +35,10 @@ public class ProfileController {
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 
-    @GetMapping("/memberId")
+    @GetMapping("/{memberId}")
     @PreAuthorize("isAuthenticated()")
-    public ResponseEntity<ProfileResponse> getProfile(@AuthenticationPrincipal SessionUser sessionUser) {
-        log.info("sessionUser info = {}", sessionUser);
-        MemberInfoResponse memberInfo = memberInfoService.getMember(sessionUser.getId());
-        ProfileResponse profileResponse = profileService.getProfile(memberInfo.getMemberId());
+    public ResponseEntity<ProfileResponse> getProfile(@AuthenticationPrincipal SessionUser sessionUser, @PathVariable Long memberId) {
+        ProfileResponse profileResponse = profileService.getProfile(memberId);
         return ResponseEntity.ok(profileResponse);
     }
 
