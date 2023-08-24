@@ -13,6 +13,7 @@ import com.dnd.health.domain.post.presentation.dto.PostResponse;
 import com.dnd.health.domain.post.presentation.dto.WrittenPostResponse;
 import com.dnd.health.domain.profile.presentation.dto.RecruitedPostResponse;
 import com.dnd.health.global.exception.ErrorCode;
+import java.util.Locale;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -50,7 +51,7 @@ public class PostService {
 //    }
 
     public List<PostResponse> findAll(long id, String role) {
-        return postRepository.findAllByMember_RoleAndMember_Id(role, id).stream()
+        return postRepository.findAllByMember_RoleAndMember_Id(role.toUpperCase(Locale.ROOT), id).stream()
                 .map(PostResponse::new)
                 .collect(Collectors.toList());
     }
