@@ -23,7 +23,7 @@ public interface PostRepository extends JpaRepository<Post, Long> {
             nativeQuery = true)
     int setPostStatusCompleted(@PathParam("status") String status, Long postId);
 
-    List<Post> findAllByWantedRuntimeAfter(LocalDateTime now);
+    List<Post> findAllByMemberIdAndWantedRuntimeAfter(Long memberId, LocalDateTime now);
 
     List<Post> findAllByMemberId(Long memberId);
 
