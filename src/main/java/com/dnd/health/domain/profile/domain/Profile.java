@@ -95,7 +95,7 @@ public class Profile {
         this.periodEx = PeriodEx.from(command.getPeriodEx());
         this.region = Region.from(command.getRegion());
         this.mbti = Mbti.from(command.getMbti());
-        this.wantedMate = WantedMate.from(command.getWantedAge(), command.getGender(), command.getWantedPersonality(), command.getPeriodEx());
+        this.wantedMate = WantedMate.from(command.getWantedAge(), command.getWantedGender(), command.getWantedPersonality(), command.getWantedPeriodEx());
 
         this.exerciseStyles.clear();
         this.exerciseStyles.addAll(command.getExerciseStyles().stream().map(ExerciseStyle::new).collect(Collectors.toList()));

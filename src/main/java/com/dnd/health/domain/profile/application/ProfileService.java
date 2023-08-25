@@ -55,7 +55,7 @@ public class ProfileService {
         profileRepository.save(profile);
 
         // 모집중인 게시글 찾기
-        List<Post> posts = postRepository.findAllByWantedRuntimeAfter(LocalDateTime.now());
+        List<Post> posts = postRepository.findAllByMemberIdAndWantedRuntimeAfter(memberId, LocalDateTime.now());
 
         return new ProfileResponse(profile, gpa, getTop4Reviews(reviews), posts);
     }

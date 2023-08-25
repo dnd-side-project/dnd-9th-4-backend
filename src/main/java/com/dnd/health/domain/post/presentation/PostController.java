@@ -51,7 +51,7 @@ public class PostController {
         Optional<Member> isMember = memberRepository.findByKakaoId(id);
         Member member = isMember.orElseThrow(() -> new MemberNotFoundException(MEMBER_NOT_FOUND));
 
-        List<PostResponse> postResponses = postService.findAll(member);
+        List<PostResponse> postResponses = postService.findAll();
         return ResponseEntity.ok(postResponses);
     }
 
