@@ -3,6 +3,7 @@ package com.dnd.health.domain.member.presentation;
 import static com.dnd.health.domain.member.application.MemberSignUpService.setCookieAndHeader;
 
 import com.dnd.health.domain.member.application.MemberInfoService;
+import com.dnd.health.domain.member.application.MemberService;
 import com.dnd.health.domain.member.application.MemberSignUpService;
 import com.dnd.health.domain.member.dto.response.LoginResponse;
 import com.dnd.health.domain.member.dto.response.MemberInfoResponse;
@@ -22,7 +23,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -36,6 +39,7 @@ public class MemberController {
 
     private final KakaoFeignService kakaoFeignService;
     private final MemberSignUpService memberSignUpService;
+    private final MemberService memberService;
     private final MemberInfoService memberInfoService;
 
     /**
@@ -91,6 +95,16 @@ public class MemberController {
         log.info("response entity : {}", responseEntity);
 
         return responseEntity;
+    }
+
+    @DeleteMapping("api/delete/{memberId}")
+    public ResponseEntity<String> deleteMember(@PathVariable Long memberId) {
+        try {
+            memberService.deleteMember(memberId);
+            return ResponseEntity.ok("Member deleted successfully");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to delete member");
+        }
     }
 
     /**

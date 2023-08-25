@@ -91,9 +91,9 @@ public class MatchingService {
         LocalDateTime today = LocalDateTime.now();
         // 신청한 매칭
         List<Match> applyList = matchingRepository.findByMemberId(memberId);
-        applyList.stream().forEach((match)-> {
-            if(match.getMatchStatus() == MatchStatus.MATCHED){
-                if(match.getPost().getWanted().getRuntime().compareTo(today) >= 0) {
+        applyList.stream().forEach((match) -> {
+            if (match.getMatchStatus() == MatchStatus.MATCHED) {
+                if (match.getPost().getWanted().getRuntime().compareTo(today) >= 0) {
                     reserved.add(new ScheduleResponse(match, false));
                 } else {
                     completed.add(new ScheduleResponse(match, false));
@@ -103,11 +103,11 @@ public class MatchingService {
 
         // 작성한 매칭
         List<Post> writtenList = postRepository.findAllByMemberId(memberId);
-        writtenList.stream().forEach((post)-> {
-            if(post.getStatus() == PostStatus.COMPLETED) {
+        writtenList.stream().forEach((post) -> {
+            if (post.getStatus() == PostStatus.COMPLETED) {
                 Match match = matchingRepository.findByPostIdAndMemberId(post.getId(), post.getMatchedMemberId())
                         .orElseThrow(() -> new MatchNotFoundException(ErrorCode.MATCH_STATUS_NOT_FOUND));
-                if(match.getPost().getWanted().getRuntime().compareTo(today) >= 0) {
+                if (match.getPost().getWanted().getRuntime().compareTo(today) >= 0) {
                     reserved.add(new ScheduleResponse(match, true));
                 } else {
                     completed.add(new ScheduleResponse(match, true));
@@ -133,10 +133,10 @@ public class MatchingService {
 
         // 신청한 매칭
         List<Match> applyList = matchingRepository.findByMemberId(memberId);
-        applyList.stream().forEach((match)-> {
-            if(match.getMatchStatus() == MatchStatus.MATCHED){
+        applyList.stream().forEach((match) -> {
+            if (match.getMatchStatus() == MatchStatus.MATCHED) {
                 LocalDateTime runtime = match.getPost().getWanted().getRuntime();
-                if(startDate.compareTo(runtime) <= 0 && endDate.compareTo(runtime) >= 0) {
+                if (startDate.compareTo(runtime) <= 0 && endDate.compareTo(runtime) >= 0) {
                     reserved.add(new ScheduleResponse(match, false));
                 }
             }
@@ -144,10 +144,10 @@ public class MatchingService {
 
         // 작성한 매칭
         List<Post> writtenList = postRepository.findAllByMemberId(memberId);
-        writtenList.stream().forEach((post)-> {
-            if(post.getStatus() == PostStatus.COMPLETED) {
+        writtenList.stream().forEach((post) -> {
+            if (post.getStatus() == PostStatus.COMPLETED) {
                 LocalDateTime runtime = post.getWanted().getRuntime();
-                if(startDate.compareTo(runtime) <= 0 && endDate.compareTo(runtime) >= 0) {
+                if (startDate.compareTo(runtime) <= 0 && endDate.compareTo(runtime) >= 0) {
                     Match match = matchingRepository.findByPostIdAndMemberId(post.getId(), post.getMatchedMemberId())
                             .orElseThrow(() -> new MatchNotFoundException(ErrorCode.MATCH_STATUS_NOT_FOUND));
 

@@ -70,6 +70,8 @@ public class MemberSignUpService {
     private void updateMemberInfo(KakaoUserInfoResponse kakaoUserInfo, Member member) {
         member.updateInfo(kakaoUserInfo.getKakao_account().getProfile().getProfile_image_url(),
                 kakaoUserInfo.getKakao_account().getProfile().getNickname());
+        log.info("kakao user update info = {}", kakaoUserInfo.getKakao_account().getProfile().getProfile_image_url());
+        log.info("kakao user update info = {}", kakaoUserInfo.getKakao_account().getProfile().getNickname());
     }
 
     public static HttpHeaders setCookieAndHeader(LoginResponse loginResult) {

@@ -61,12 +61,12 @@ public class Profile {
     private String profileImg;
 
     @Builder.Default
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "profile_id")
     private List<ExerciseStyle> exerciseStyles = new ArrayList<>();
 
     @Builder.Default
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "profile_id")
     private List<Interest> interests = new ArrayList<>();
 
