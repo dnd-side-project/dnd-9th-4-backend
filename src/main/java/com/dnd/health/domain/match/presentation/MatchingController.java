@@ -50,8 +50,7 @@ public class MatchingController {
     @GetMapping("/{postId}")
     public ResponseEntity<MatchResponse> getMatchStatus(@AuthenticationPrincipal SessionUser sessionUser, @PathVariable Long postId) {
         MemberInfoResponse memberInfo = memberInfoService.getMember(sessionUser.getId());
-        Optional<Member> member = Optional.ofNullable(memberInfoService.getNewPleMember(memberInfo.getMemberId()));
-        MatchResponse match = matchingService.getMatch(postId, member.get().getId());
+        MatchResponse match = matchingService.getMatch(postId, memberInfo.getMemberId());
         return ResponseEntity.ok(match);
     }
 
