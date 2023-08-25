@@ -73,17 +73,37 @@ public class Profile {
     @Embedded
     private WantedMate wantedMate;
 
+//    public void updateInfo(ProfileUpdateCommand command) {
+//        this.introduce = command.getIntroduce();
+//        this.profileImg = command.getProfileImg();
+//        this.sport = command.getSport().stream().map(Sport::from).collect(Collectors.toList());
+//        this.periodEx = PeriodEx.from(command.getPeriodEx());
+//        this.region = Region.from(command.getRegion());
+//        this.mbti = Mbti.from(command.getMbti());
+//        this.wantedMate = WantedMate.from(command.getWantedAge(), command.getGender(), command.getWantedPersonality(), command.getPeriodEx());
+//        this.exerciseStyles = command.getExerciseStyles().stream().map(ExerciseStyle::new).collect(Collectors.toList());
+//        this.interests = command.getInterests().stream().map(Interest::new).collect(Collectors.toList());
+//    }
+
     public void updateInfo(ProfileUpdateCommand command) {
         this.introduce = command.getIntroduce();
         this.profileImg = command.getProfileImg();
-        this.sport = command.getSport().stream().map(Sport::from).collect(Collectors.toList());
+
+        this.sport.clear();
+        this.sport.addAll(command.getSport().stream().map(Sport::from).collect(Collectors.toList()));
+
         this.periodEx = PeriodEx.from(command.getPeriodEx());
         this.region = Region.from(command.getRegion());
         this.mbti = Mbti.from(command.getMbti());
         this.wantedMate = WantedMate.from(command.getWantedAge(), command.getGender(), command.getWantedPersonality(), command.getPeriodEx());
-        this.exerciseStyles = command.getExerciseStyles().stream().map(ExerciseStyle::new).collect(Collectors.toList());
-        this.interests = command.getInterests().stream().map(Interest::new).collect(Collectors.toList());
+
+        this.exerciseStyles.clear();
+        this.exerciseStyles.addAll(command.getExerciseStyles().stream().map(ExerciseStyle::new).collect(Collectors.toList()));
+
+        this.interests.clear();
+        this.interests.addAll(command.getInterests().stream().map(Interest::new).collect(Collectors.toList()));
     }
+
 
     public void setGpa(String gpa) {
         this.gpa = Gpa.from(gpa);
