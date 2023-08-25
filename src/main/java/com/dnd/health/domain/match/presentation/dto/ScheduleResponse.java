@@ -16,6 +16,8 @@ public class ScheduleResponse {
 
     private String profileImg;
 
+    private String username;
+
     private String title;
 
     private String region;
@@ -29,9 +31,11 @@ public class ScheduleResponse {
         if(isWriter) {
             this.memberId = match.getMember().getId();
             this.profileImg = match.getMember().getProfile().getProfileImg();
+            this.username = match.getMember().getUsername().to();
         }else {
             this.memberId = match.getPost().getMember().getId();
             this.profileImg = match.getPost().getMember().getProfile().getProfileImg();
+            this.username = match.getPost().getMember().getUsername().to();
         }
         this.title = match.getPost().getTitle().to();
         this.region = match.getPost().getRegion().to();
