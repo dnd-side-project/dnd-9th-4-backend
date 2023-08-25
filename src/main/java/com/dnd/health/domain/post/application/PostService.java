@@ -48,18 +48,18 @@ public class PostService {
         return new PostResponse(post);
     }
 
-//    public List<PostResponse> findAll() {
-//        return postRepository.findAll().stream()
-//                .map(PostResponse::new)
-//                .collect(Collectors.toList());
-//    }
-
-    public List<PostResponse> findAll(Member member) {
-        List<PostResponse> postList = postRepository.findAllByMemberId(member.getId()).stream()
-                .map(post -> new PostResponse(post, member))
+    public List<PostResponse> findAll() {
+        return postRepository.findAll().stream()
+                .map(PostResponse::new)
                 .collect(Collectors.toList());
-        return postList;
     }
+
+//    public List<PostResponse> findAll(Member member) {
+//        List<PostResponse> postList = postRepository.findAllByMemberId(member.getId()).stream()
+//                .map(post -> new PostResponse(post, member))
+//                .collect(Collectors.toList());
+//        return postList;
+//    }
 
     public PostResponse update(PostUpdateCommand command) {
         Post post = postRepository.findById(command.getId())
