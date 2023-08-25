@@ -11,5 +11,5 @@ public interface ProfileRepository extends JpaRepository<Profile, Long> {
 
     List<Profile> findAllByRegionAndMemberIdNot(Region region, Long memberId);
 
-    List<Profile> findBySomeCondition();
+//    List<Profile> findBySomeCondition();
 }
