@@ -55,10 +55,9 @@ public class PostService {
 //    }
 
     public List<PostResponse> findAll(Member member) {
-        List<PostResponse> postList = postRepository.findAllByMember_Role(Role.ROLE_MEMBER).stream()
+        List<PostResponse> postList = postRepository.findAllByMemberId(member.getId()).stream()
                 .map(post -> new PostResponse(post, member))
                 .collect(Collectors.toList());
-
         return postList;
     }
 
