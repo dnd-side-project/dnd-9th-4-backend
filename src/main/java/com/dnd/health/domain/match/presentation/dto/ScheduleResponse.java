@@ -12,6 +12,8 @@ public class ScheduleResponse {
 
     private Long id;
 
+    private Long postId;
+
     private Long memberId;
 
     private String profileImg;
@@ -28,6 +30,7 @@ public class ScheduleResponse {
 
     public ScheduleResponse(Match match, boolean isWriter) {
         this.id = match.getId();
+        this.postId = match.getPost().getId();
         if(isWriter) {
             this.memberId = match.getMember().getId();
             this.profileImg = match.getMember().getProfile().getProfileImg();
