@@ -11,6 +11,7 @@ import java.util.Optional;
 
 public interface MatchingRepository extends JpaRepository<Match, Long> {
 
+    @Query("SELECT m FROM Match m WHERE m.post.id = :postId AND m.member.id = :memberId")
     Optional<Match> findByPostIdAndMemberId(Long postId, Long memberId);
 
     List<Match> findAllByPostId(Long postId);
