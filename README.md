@@ -26,7 +26,7 @@
         </td>
         <td align="center">
             <a href="https://github.com/miraekwak">
-                <img src="https://avatars.githubusercontent.com/u/62375220?v=4" style="width:150px;border-radius:50%;"><br><b>박미래</b>
+                <img src="https://avatars.githubusercontent.com/u/62375220?v=4" style="width:150px;border-radius:50%;"><br><b>곽미래</b>
             </a>
         </td>
     </tr>
@@ -41,7 +41,7 @@
   - Backend init Project 설계 및 구현
   - Kakao OAuth2.0 with JWT 구현
   - Member API CRUD 구현
-- **박미래**
+- **곽미래**
   - API Docs 설계   
   - Message API CRUD 구현
   - POST API CRUD 구현
